@@ -29,26 +29,14 @@ class EditFeelingArtistsPresenter: EditFeelingArtistsPresenterProtocol {
             
         })
     }
+
     
-    private func setArtistsImage(artists: [Artist?], completion: @escaping() -> Void) {
-        artistsMatch = [] 
-        var index = 1
+    func goToCreateList(feeling: SurpriseMeFeeling, artists: [ArtistWithImage]) {
+        var artistsSeleted: [Artist?] = []
         for artist in artists {
-            guard let artist = artist else { return }
-            let url = artist.images?.first?.url ?? ""
-            ApiCaller.shared.getImage(url: url, completion: { [weak self] artistImage in
-                let artistWithImage = ArtistWithImage(artist: artist, artistImage: artistImage ?? UIImage())
-                self?.artistsMatch?.append(artistWithImage)
-                index += 1
-                if artists.count == index {
-                    completion()
-                }
-            })
+            artistsSeleted.append(artist.artist)
         }
-    }
-    
-    func goToCreateList(feeling: SurpriseMeFeeling, artists: [Artist?]) {
-        router?.goToCreateList(feeling: feeling, artists: artists)
+        router?.goToCreateList(feeling: feeling, artists: artistsSeleted)
     }
     
     func setFavList(forKey: String, fav: Artist, completion: @escaping (Bool) -> Void) {
@@ -72,11 +60,27 @@ class EditFeelingArtistsPresenter: EditFeelingArtistsPresenterProtocol {
     // Returns a list with the Artists saved in userDefaults
     static func getFavs(forKey: String, completion: @escaping ([Artist?]) -> Void) {
         let forkey = forKey
-        var artistsList: [Artist]?
-        if let data = UserDefaults.standard.value(forKey: forkey) as? Data {
+        let artistsList: [Artist?]? = EditFeelingArtistsPresenter.findFavsInUserDefault(forKey: forkey)
+        completion(artistsList ?? [])
+    }
+    
+    func getFavs(forKey: String) {
+        view?.lookingForNewFavorite = false
+        let forkey = forKey
+        let artistsList: [Artist?]? = EditFeelingArtistsPresenter.findFavsInUserDefault(forKey: forkey)
+        guard let artistsList = artistsList else { return }
+        setArtistsImage(artists: artistsList, completion: { [weak self] in
+            self?.view?.tableView.reloadData()
+        })
+    }
+    
+    private static func findFavsInUserDefault(forKey: String) -> [Artist?]? {
+        var artistsList: [Artist?]?
+        UserDefaults.standard.synchronize()
+        if let data = UserDefaults.standard.value(forKey: forKey) as? Data {
             artistsList = try? PropertyListDecoder().decode([Artist].self, from: data)
         }
-        completion(artistsList ?? [])
+        return artistsList
     }
 
     func removeFav(forKey: String, fav: Artist, completion: @escaping (Bool) -> Void) {
@@ -97,7 +101,24 @@ class EditFeelingArtistsPresenter: EditFeelingArtistsPresenterProtocol {
         }
         UserDefaults.standard.set(try? PropertyListEncoder().encode(artistsList), forKey: forkey)
         UserDefaults.standard.synchronize()
-//        artistsMatch = artistsList
         completion(true)
+    }
+    
+    
+    private func setArtistsImage(artists: [Artist?], completion: @escaping() -> Void) {
+        artistsMatch = []
+        var index = 1
+        for artist in artists {
+            guard let artist = artist else { return }
+            let url = artist.images?.first?.url ?? ""
+            ApiCaller.shared.getImage(url: url, completion: { [weak self] artistImage in
+                let artistWithImage = ArtistWithImage(artist: artist, artistImage: artistImage ?? UIImage())
+                self?.artistsMatch?.append(artistWithImage)
+                index += 1
+                if artists.count == index {
+                    completion()
+                }
+            })
+        }
     }
 }

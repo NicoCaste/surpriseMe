@@ -19,11 +19,11 @@ protocol EditFeelingArtistsInteractorProtocol {
 protocol EditFeelingArtistsPresenterProtocol {
     var feeling: SurpriseMeFeeling? { get }
     var artistsMatch: [ArtistWithImage]? { get }
-    func goToCreateList(feeling: SurpriseMeFeeling, artists: [Artist?])
+    func goToCreateList(feeling: SurpriseMeFeeling, artists: [ArtistWithImage])
     func findArtist(artist: String)
     func setFavList(forKey: String, fav: Artist, completion: @escaping (Bool) -> Void)
     func removeFav(forKey: String, fav: Artist, completion: @escaping (Bool) -> Void)
-    static func getFavs(forKey: String, completion: @escaping ([Artist?]) -> Void)
+    func getFavs(forKey: String)
 }
 protocol EditFeelingArtistsRouterProtocol {
     func goToCreateList(feeling: SurpriseMeFeeling, artists: [Artist?])
