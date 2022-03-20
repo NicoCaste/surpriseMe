@@ -168,8 +168,15 @@ class EditFeelingArtistsViewController: UIViewController, EditFeelingArtistsView
     private func showCreatePlayListButton() {
         guard let artists = presenter?.artistsMatch?.count else { return }
         if !lookingForNewFavorite {
-            createPlayListButton.isHidden = (artists > 0) ? false : true 
+            createPlayListButton.isHidden = (artists > 0) ? false : true
         }
+    }
+    
+    private func resetSearch() {
+        lookingForNewFavorite = false
+        newArtistsTextField.text = ""
+        presenter?.getFavs(forKey: key)
+        tableNeedtoBeReloaded(itIsNecesary: true)
     }
     
     //MARK: UITableViewDataSource
@@ -200,10 +207,7 @@ class EditFeelingArtistsViewController: UIViewController, EditFeelingArtistsView
                 guard let currentArtist = presenter?.artistsMatch?[indexPath.row] else { return }
                 presenter?.setFavList(forKey: key, fav: currentArtist.artist, completion:{ [weak self] saveArtist in
                     if saveArtist {
-                        self?.newArtistsTextField.text = ""
-                        self?.lookingForNewFavorite = false
-                        self?.presenter?.getFavs(forKey: self?.key ?? "")
-                        self?.tableNeedtoBeReloaded(itIsNecesary: true)
+                        self?.resetSearch()
                     }
                 })
             }
@@ -219,10 +223,7 @@ class EditFeelingArtistsViewController: UIViewController, EditFeelingArtistsView
             let deleteAction = UIContextualAction(style: .destructive, title: "Delete", handler: {[weak self] _,_,_ in
                 self?.presenter?.removeFav(forKey: self?.key ?? "", fav: currentArtist ?? Artist(), completion: {[weak self] artistsWasRemoved in
                     if artistsWasRemoved {
-                        self?.lookingForNewFavorite = false
-                        self?.newArtistsTextField.text = ""
-                        self?.presenter?.getFavs(forKey: self?.key ?? "")
-                        self?.tableNeedtoBeReloaded(itIsNecesary: true)
+                        self?.resetSearch()
                     }
                 })
             })
