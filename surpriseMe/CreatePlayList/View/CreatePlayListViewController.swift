@@ -22,7 +22,6 @@ class CreatePlayListViewController: UIViewController, CreatePlayListViewProtocol
         setCreatePlayListButton()
         setTableView()
         reloadList()
-        // Do any additional setup after loading the view.
     }
     
     func reloadList() {

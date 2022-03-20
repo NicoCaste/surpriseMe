@@ -35,25 +35,19 @@ class SurpriseMeTableViewCell: UITableViewCell {
             imageName = "iWantToParty"
         }
         TextFeeling = FeelingCategories.getTitle(feeling: feeling)
-        setFeelingImage(imageName: imageName)
+        if let image = UIImage(named: imageName) {
+            setFeelingImage(image: image)
+        }
         setFeelingText(text: TextFeeling)
     }
     
-    func populate(imageUrl: String, text: String) {
-        setFeelingImage(image: UIImage())
-        ApiCaller.shared.getImage(url: imageUrl, completion: {[weak self] imageLoad in
-                self?.setFeelingImage(image: imageLoad)
-                self?.setFeelingText(text: text)
-            })
+    func populate(image: UIImage, text: String) {
+        setFeelingImage(image: image)
+        setFeelingText(text: text)
     }
     
-    func setFeelingImage(imageName: String? = nil, image: UIImage? = nil ) {
-        if let imageName = imageName {
-            feelingImage.image = UIImage(named: imageName)
-        }
-        if let image = image {
-            feelingImage.image = image
-        }
+    func setFeelingImage(image: UIImage ) {
+        feelingImage.image = image
         feelingImage.translatesAutoresizingMaskIntoConstraints = false
         contentView.addSubview(feelingImage)
         feelingImage.contentMode = .scaleAspectFill

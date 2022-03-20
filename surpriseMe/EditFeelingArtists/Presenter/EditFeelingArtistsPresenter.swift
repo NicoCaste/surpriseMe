@@ -13,13 +13,38 @@ class EditFeelingArtistsPresenter: EditFeelingArtistsPresenterProtocol {
     var interactor: EditFeelingArtistsInteractorProtocol?
     var router: EditFeelingArtistsRouterProtocol?
     var feeling: SurpriseMeFeeling?
-    var artistsMatch: [Artist?]?
+    var artistsMatch: [ArtistWithImage]? = []
     
-    func findArtist(artist: String, completion: @escaping((EditFeeling?) -> Void)) {
+    func findArtist(artist: String) {
+        view?.lookingForNewFavorite = (artist != "") ? true : false
+        if artist == "" {
+            view?.tableView.reloadData()
+        }
+        
         interactor?.findArtist(artist: artist, completion: { [weak self] matchArtist in
-            self?.artistsMatch = matchArtist?.artists.items
-            completion(matchArtist)
+            guard let artists = matchArtist?.artists.items else { return }
+            self?.setArtistsImage(artists: artists, completion: {
+                self?.view?.tableView.reloadData()
+            })
+            
         })
+    }
+    
+    private func setArtistsImage(artists: [Artist?], completion: @escaping() -> Void) {
+        artistsMatch = [] 
+        var index = 1
+        for artist in artists {
+            guard let artist = artist else { return }
+            let url = artist.images?.first?.url ?? ""
+            ApiCaller.shared.getImage(url: url, completion: { [weak self] artistImage in
+                let artistWithImage = ArtistWithImage(artist: artist, artistImage: artistImage ?? UIImage())
+                self?.artistsMatch?.append(artistWithImage)
+                index += 1
+                if artists.count == index {
+                    completion()
+                }
+            })
+        }
     }
     
     func goToCreateList(feeling: SurpriseMeFeeling, artists: [Artist?]) {
@@ -72,7 +97,7 @@ class EditFeelingArtistsPresenter: EditFeelingArtistsPresenterProtocol {
         }
         UserDefaults.standard.set(try? PropertyListEncoder().encode(artistsList), forKey: forkey)
         UserDefaults.standard.synchronize()
-        artistsMatch = artistsList
+//        artistsMatch = artistsList
         completion(true)
     }
 }

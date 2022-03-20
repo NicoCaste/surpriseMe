@@ -119,14 +119,7 @@ class EditFeelingArtistsViewController: UIViewController, EditFeelingArtistsView
     
     @objc func textFieldDidChange(_ textField: UITextField ) {
         guard let textFieldtext = textField.text else {return}
-        presenter?.findArtist(artist: textFieldtext, completion: { [weak self] matchArtist in
-            if let _ = matchArtist {
-                self?.lookingForNewFavorite = true
-            } else {
-                self?.lookingForNewFavorite = false
-            }
-            self?.tableView.reloadData()
-        })
+        presenter?.findArtist(artist: textFieldtext)
     }
     
     func setTableView() {
@@ -194,11 +187,15 @@ class EditFeelingArtistsViewController: UIViewController, EditFeelingArtistsView
         let cell = tableView.dequeueReusableCell(withIdentifier: "SurpriseMeTableViewCell") as? SurpriseMeTableViewCell
         guard let cell = cell else { return UITableViewCell()}
         if lookingForNewFavorite {
-            guard let currentArtist = presenter?.artistsMatch?[indexPath.row] else { return UITableViewCell()}
-            cell.populate(imageUrl: currentArtist.images?.first?.url ?? "", text: currentArtist.name ?? "")
+            if let matchArtistCount = presenter?.artistsMatch?.count {
+                if indexPath.row < matchArtistCount {
+                    guard let currentArtist = presenter?.artistsMatch?[indexPath.row] else { return UITableViewCell()}
+                    cell.populate(image: currentArtist.artistImage, text: currentArtist.artist.name ?? "")
+                }
+            }
         } else {
             let imageUrl = artistsAlreadyFavs[indexPath.row]?.images?.first?.url ?? ""
-            cell.populate(imageUrl: imageUrl, text: artistsAlreadyFavs[indexPath.row]?.name ?? "")
+//            cell.populate(imageUrl: imageUrl, text: artistsAlreadyFavs[indexPath.row]?.name ?? "")
         }
 
         return cell
@@ -206,7 +203,7 @@ class EditFeelingArtistsViewController: UIViewController, EditFeelingArtistsView
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let currentArtist = presenter?.artistsMatch?[indexPath.row] else { return }
-        presenter?.setFavList(forKey: key, fav: currentArtist, completion:{ [weak self] saveArtist in
+        presenter?.setFavList(forKey: key, fav: currentArtist.artist, completion:{ [weak self] saveArtist in
             if saveArtist {
                 self?.lookingForNewFavorite = false
                 self?.tableNeedtoBeReloaded(itIsNecesary: true)
