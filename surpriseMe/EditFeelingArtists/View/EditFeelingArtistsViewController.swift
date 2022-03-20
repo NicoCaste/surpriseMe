@@ -11,7 +11,7 @@ class EditFeelingArtistsViewController: UIViewController, EditFeelingArtistsView
     var presenter: EditFeelingArtistsPresenterProtocol?
     var newArtistsTextField: UITextField = UITextField()
     var tableView: UITableView = UITableView()
-    lazy var saveFeelingArtistsButton: UIButton = UIButton()
+    lazy var createPlayListButton: UIButton = UIButton()
     lazy var addNewArtistsLabel: UILabel = UILabel()
     
     var keyboardActive: Bool = false
@@ -133,24 +133,24 @@ class EditFeelingArtistsViewController: UIViewController, EditFeelingArtistsView
         tableView.topAnchor.constraint(equalTo: newArtistsTextField.safeAreaLayoutGuide.bottomAnchor, constant: 10).isActive = true
         tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
         tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
-        tableView.bottomAnchor.constraint(equalTo: saveFeelingArtistsButton.topAnchor, constant: -10).isActive = true
+        tableView.bottomAnchor.constraint(equalTo: createPlayListButton.topAnchor, constant: -10).isActive = true
     }
     
     func setCreatePlayListButton() {
-        saveFeelingArtistsButton.translatesAutoresizingMaskIntoConstraints = false
-        saveFeelingArtistsButton.addTarget(self, action:  #selector(createPlayList), for: .touchUpInside)
-        view.addSubview(saveFeelingArtistsButton)
-        saveFeelingArtistsButton.setTitle("Create New Playlist", for: .normal)
-        saveFeelingArtistsButton.layer.masksToBounds = true
-        saveFeelingArtistsButton.layer.cornerRadius = 5
-        saveFeelingArtistsButton.backgroundColor = .systemBlue
+        createPlayListButton.translatesAutoresizingMaskIntoConstraints = false
+        createPlayListButton.addTarget(self, action:  #selector(createPlayList), for: .touchUpInside)
+        view.addSubview(createPlayListButton)
+        createPlayListButton.setTitle("Create New Playlist", for: .normal)
+        createPlayListButton.layer.masksToBounds = true
+        createPlayListButton.layer.cornerRadius = 5
+        createPlayListButton.backgroundColor = .systemBlue
         guard let newFont = UIFont(name: "Noto Sans Myanmar Bold", size: 18) else { return }
-        saveFeelingArtistsButton.titleLabel?.font = newFont
+        createPlayListButton.titleLabel?.font = newFont
         
-        saveFeelingArtistsButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -10).isActive = true
-        saveFeelingArtistsButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20).isActive = true
-        saveFeelingArtistsButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20).isActive = true
-        saveFeelingArtistsButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        createPlayListButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -10).isActive = true
+        createPlayListButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20).isActive = true
+        createPlayListButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20).isActive = true
+        createPlayListButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
     }
     
     @objc func createPlayList() {
@@ -165,10 +165,19 @@ class EditFeelingArtistsViewController: UIViewController, EditFeelingArtistsView
         tableView.reloadData()
     }
     
+    private func showCreatePlayListButton() {
+        guard let artists = presenter?.artistsMatch?.count else { return }
+        if !lookingForNewFavorite {
+            createPlayListButton.isHidden = (artists > 0) ? false : true 
+        }
+    }
+    
     //MARK: UITableViewDataSource
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         self.tableView.allowsSelection = lookingForNewFavorite
-        return presenter?.artistsMatch?.count ?? 0
+        guard let artists = presenter?.artistsMatch?.count else { return 0 }
+        showCreatePlayListButton()
+        return artists
         
     }
     

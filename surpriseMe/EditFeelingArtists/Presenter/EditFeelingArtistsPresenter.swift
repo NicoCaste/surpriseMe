@@ -107,7 +107,7 @@ class EditFeelingArtistsPresenter: EditFeelingArtistsPresenterProtocol {
     
     private func setArtistsImage(artists: [Artist?], completion: @escaping() -> Void) {
         artistsMatch = []
-        var index = 1
+        var index = 0
         for artist in artists {
             guard let artist = artist else { return }
             let url = artist.images?.first?.url ?? ""
