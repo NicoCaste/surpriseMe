@@ -36,7 +36,7 @@
 		50084D452765503D0031ADF6 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50084D442765503D0031ADF6 /* ProfileViewController.swift */; };
 		50084D47276550790031ADF6 /* ProfileModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50084D46276550790031ADF6 /* ProfileModule.swift */; };
 		50084D49276550C20031ADF6 /* SurpriseMeModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50084D48276550C20031ADF6 /* SurpriseMeModule.swift */; };
-		50084D4B276550FD0031ADF6 /* ImBoringModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50084D4A276550FD0031ADF6 /* ImBoringModule.swift */; };
+		50084D4B276550FD0031ADF6 /* MyPlayListsModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50084D4A276550FD0031ADF6 /* MyPlayListsModule.swift */; };
 		50084D4D27662EB70031ADF6 /* SurpriseMeInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50084D4C27662EB70031ADF6 /* SurpriseMeInteractor.swift */; };
 		50084D4F27662EF50031ADF6 /* SurpriseMePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50084D4E27662EF50031ADF6 /* SurpriseMePresenter.swift */; };
 		50084D5127662F1F0031ADF6 /* SurpriseMeEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50084D5027662F1F0031ADF6 /* SurpriseMeEntity.swift */; };
@@ -60,6 +60,8 @@
 		50084D84276819C70031ADF6 /* ArtistRelatedArtistCodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50084D83276819C70031ADF6 /* ArtistRelatedArtistCodable.swift */; };
 		50084D87276826BB0031ADF6 /* ArtistTopTracksCodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50084D86276826BB0031ADF6 /* ArtistTopTracksCodable.swift */; };
 		50084D8A27683BD20031ADF6 /* TrackListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50084D8927683BD20031ADF6 /* TrackListTableViewCell.swift */; };
+		5034F3C327EA22E600E6C14E /* AVKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5034F3C227EA22E600E6C14E /* AVKit.framework */; };
+		5034F3C527EA22FF00E6C14E /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5034F3C427EA22FF00E6C14E /* AVFoundation.framework */; };
 		5036A9D627DC0FA000957117 /* ActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5036A9D527DC0FA000957117 /* ActivityIndicator.swift */; };
 		503CB42727A431AB002F5B23 /* ExternalAccessory.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 503CB42627A431AB002F5B23 /* ExternalAccessory.framework */; };
 		50E5629B27C117B100CFED94 /* EditFeelingArtistsEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50E5629A27C117B100CFED94 /* EditFeelingArtistsEntity.swift */; };
@@ -127,7 +129,7 @@
 		50084D442765503D0031ADF6 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		50084D46276550790031ADF6 /* ProfileModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileModule.swift; sourceTree = "<group>"; };
 		50084D48276550C20031ADF6 /* SurpriseMeModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurpriseMeModule.swift; sourceTree = "<group>"; };
-		50084D4A276550FD0031ADF6 /* ImBoringModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImBoringModule.swift; sourceTree = "<group>"; };
+		50084D4A276550FD0031ADF6 /* MyPlayListsModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPlayListsModule.swift; sourceTree = "<group>"; };
 		50084D4C27662EB70031ADF6 /* SurpriseMeInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurpriseMeInteractor.swift; sourceTree = "<group>"; };
 		50084D4E27662EF50031ADF6 /* SurpriseMePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurpriseMePresenter.swift; sourceTree = "<group>"; };
 		50084D5027662F1F0031ADF6 /* SurpriseMeEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurpriseMeEntity.swift; sourceTree = "<group>"; };
@@ -151,6 +153,8 @@
 		50084D83276819C70031ADF6 /* ArtistRelatedArtistCodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtistRelatedArtistCodable.swift; sourceTree = "<group>"; };
 		50084D86276826BB0031ADF6 /* ArtistTopTracksCodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtistTopTracksCodable.swift; sourceTree = "<group>"; };
 		50084D8927683BD20031ADF6 /* TrackListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackListTableViewCell.swift; sourceTree = "<group>"; };
+		5034F3C227EA22E600E6C14E /* AVKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVKit.framework; path = System/Library/Frameworks/AVKit.framework; sourceTree = SDKROOT; };
+		5034F3C427EA22FF00E6C14E /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		5036A9D527DC0FA000957117 /* ActivityIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicator.swift; sourceTree = "<group>"; };
 		503CB42527A431AB002F5B23 /* surpriseMe.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = surpriseMe.entitlements; sourceTree = "<group>"; };
 		503CB42627A431AB002F5B23 /* ExternalAccessory.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ExternalAccessory.framework; path = System/Library/Frameworks/ExternalAccessory.framework; sourceTree = SDKROOT; };
@@ -175,6 +179,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5034F3C527EA22FF00E6C14E /* AVFoundation.framework in Frameworks */,
+				5034F3C327EA22E600E6C14E /* AVKit.framework in Frameworks */,
 				503CB42727A431AB002F5B23 /* ExternalAccessory.framework in Frameworks */,
 				034AF21FC59DFE58A6727D40 /* Pods_surpriseMe.framework in Frameworks */,
 			);
@@ -226,7 +232,7 @@
 			children = (
 				503CB42527A431AB002F5B23 /* surpriseMe.entitlements */,
 				50084D68276772430031ADF6 /* CreatePlayList */,
-				50084D1F27654CC70031ADF6 /* ImBoring */,
+				50084D1F27654CC70031ADF6 /* MyPlaylists */,
 				50084D1E27654CAA0031ADF6 /* SurpriseMe */,
 				50E5629327C1171400CFED94 /* EditFeelingArtists */,
 				50084D1D27654C9D0031ADF6 /* Profile */,
@@ -383,7 +389,7 @@
 			path = SurpriseMe;
 			sourceTree = "<group>";
 		};
-		50084D1F27654CC70031ADF6 /* ImBoring */ = {
+		50084D1F27654CC70031ADF6 /* MyPlaylists */ = {
 			isa = PBXGroup;
 			children = (
 				50084D3F27654FEC0031ADF6 /* View */,
@@ -391,9 +397,9 @@
 				50084D3D27654FD90031ADF6 /* Presenter */,
 				50084D3C27654FD20031ADF6 /* Entity */,
 				50084D3B27654FCD0031ADF6 /* Router */,
-				50084D4A276550FD0031ADF6 /* ImBoringModule.swift */,
+				50084D4A276550FD0031ADF6 /* MyPlayListsModule.swift */,
 			);
-			path = ImBoring;
+			path = MyPlaylists;
 			sourceTree = "<group>";
 		};
 		50084D2027654CE60031ADF6 /* View */ = {
@@ -737,6 +743,8 @@
 		ED8059C9CE50BDC60625027B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				5034F3C427EA22FF00E6C14E /* AVFoundation.framework */,
+				5034F3C227EA22E600E6C14E /* AVKit.framework */,
 				503CB42627A431AB002F5B23 /* ExternalAccessory.framework */,
 				C730DC8CB5596CCAA2007365 /* Pods_surpriseMe.framework */,
 				1A6F78FE3331DEEF5B514F5C /* Pods_surpriseMe_surpriseMeUITests.framework */,
@@ -984,7 +992,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				50084D6727669F450031ADF6 /* ProfileCodable.swift in Sources */,
-				50084D4B276550FD0031ADF6 /* ImBoringModule.swift in Sources */,
+				50084D4B276550FD0031ADF6 /* MyPlayListsModule.swift in Sources */,
 				50084D72276775A20031ADF6 /* CreatePlayListInteractor.swift in Sources */,
 				50084D5127662F1F0031ADF6 /* SurpriseMeEntity.swift in Sources */,
 				5036A9D627DC0FA000957117 /* ActivityIndicator.swift in Sources */,
@@ -1211,7 +1219,7 @@
 				CODE_SIGN_ENTITLEMENTS = surpriseMe/surpriseMe.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 3FP88JQ62N;
+				DEVELOPMENT_TEAM = 39TZ25CHH8;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = surpriseMe/Info.plist;
 				INFOPLIST_KEY_NSMainNibFile = HomeViewController;
@@ -1243,7 +1251,7 @@
 				CODE_SIGN_ENTITLEMENTS = surpriseMe/surpriseMe.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 3FP88JQ62N;
+				DEVELOPMENT_TEAM = 39TZ25CHH8;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = surpriseMe/Info.plist;
 				INFOPLIST_KEY_NSMainNibFile = HomeViewController;

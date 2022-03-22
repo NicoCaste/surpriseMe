@@ -1,5 +1,5 @@
 //
-//  ImBoringViewController.swift
+//  MyPlayListsViewController.swift
 //  surpriseMe
 //
 //  Created by Nicolas Castello Luro on 11/12/2021.
@@ -7,11 +7,11 @@
 
 import UIKit
 
-class ImBoringViewController: UIViewController {
+class MyPlayListsViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        title =  "I'm Boring"
+        title =  "My Playlists"
         view.backgroundColor = .systemBackground
         // Do any additional setup after loading the view.
     }

@@ -6,11 +6,16 @@
 //
 
 import UIKit
+import AVFAudio
 
 class TrackListTableViewCell: UITableViewCell {
     lazy var trackImage: UIImageView = UIImageView()
     lazy var trackName: UILabel = UILabel()
     lazy var bandName: UILabel = UILabel()
+    lazy var playStopButton: UIButton = UIButton()
+    lazy var playStopImage: UIImageView = UIImageView()
+    var isPlaying: Bool = false
+    var urlSong: String = ""
   
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super .init(style: style, reuseIdentifier: reuseIdentifier)
@@ -21,9 +26,72 @@ class TrackListTableViewCell: UITableViewCell {
     }
     
     func populate(trackWithImage: TrackWithImage) {
+        setPlayStopButton(isPlayed: trackWithImage.track.isPlayable ?? false, urlString: trackWithImage.track.previewUrl ?? "")
+        setPlayStopImage(isPlayed: trackWithImage.track.isPlayable ?? false)
         setTrackImage(image: trackWithImage.imageTrack)
         setTrackName(text: trackWithImage.track.name ?? "")
         setBandName(band: trackWithImage.track.artists.first??.name ?? "")
+    }
+    
+    //MARK: SetPlayStopButton
+    func setPlayStopButton(isPlayed: Bool, urlString: String ) {
+        playStopButton.isHidden = (isPlayed) ? false : true
+        urlSong = urlString
+        playStopButton.addTarget(self, action: #selector(playStopButtonAction), for: .touchUpInside)
+        playStopButton.translatesAutoresizingMaskIntoConstraints = false
+        contentView.addSubview(playStopButton)
+        
+        playStopButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        playStopButton.widthAnchor.constraint(equalToConstant: 50).isActive = true
+        playStopButton.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
+        playStopButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10).isActive = true
+    }
+    
+    @objc func playStopButtonAction() {
+        let nameImage = (isPlaying) ? "pause.circle.fill" : "play.circle.fill"
+        isPlaying = !isPlaying
+        playStopImage.image = UIImage(systemName: nameImage)
+        contentView.reloadInputViews()
+        playStopMusic(urlString: urlSong)
+    }
+    
+    func playStopMusic(urlString: String) {
+        guard let url = URL(string: urlString) else {return}
+        let downloadSong: URLSessionDownloadTask = URLSession.shared.downloadTask(with: url, completionHandler: { urlNew, resp, er in
+               do {
+                   guard let urlLocal = urlNew else { return }
+                   try AVAudioSession.sharedInstance().setCategory(.playback, mode: .default)
+                   try AVAudioSession.sharedInstance().setActive(true)
+                   let player = try AVAudioPlayer(contentsOf: urlLocal)
+                   player.prepareToPlay()
+                   print(player.prepareToPlay())
+                   player.volume = 1.0
+                   player.play()
+                   print(player.isPlaying)
+               } catch let error as NSError {
+                   //self.player = nil
+                   print(error.localizedDescription)
+               } catch {
+                   print("AVAudioPlayer init failed")
+               }
+        })
+        downloadSong.resume()
+        
+    }
+    
+    //MARK: SetPlayStopImage
+    func setPlayStopImage(isPlayed: Bool) {
+        playStopImage.isHidden = (isPlayed) ? false : true
+        playStopImage.image = UIImage(systemName: "play.circle.fill")
+        playStopImage.tintColor = .green
+        playStopImage.translatesAutoresizingMaskIntoConstraints = false
+        playStopButton.addSubview(playStopImage)
+        
+        playStopImage.heightAnchor.constraint(equalToConstant: 40).isActive = true
+        playStopImage.widthAnchor.constraint(equalToConstant: 40).isActive = true
+        playStopImage.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
+        playStopImage.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10).isActive = true
+        
     }
     
     //MARK: SetTrackName
@@ -36,7 +104,7 @@ class TrackListTableViewCell: UITableViewCell {
         trackName.topAnchor.constraint(equalTo: trackImage.topAnchor).isActive = true
         trackName.leadingAnchor.constraint(equalTo: trackImage
                                                 .trailingAnchor, constant: 20).isActive = true
-        trackName.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20).isActive = true
+        trackName.trailingAnchor.constraint(equalTo: playStopImage.leadingAnchor, constant: -20).isActive = true
     }
     
     //MARK: SetBandName

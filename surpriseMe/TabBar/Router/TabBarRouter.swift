@@ -11,7 +11,7 @@ class TabBarRouter: TabBarRouterProtocol {
     weak var viewController: UITabBarController?
     
     func goToImBoring() -> UINavigationController {
-        let imBoringView = ImBoringModule.build()
+        let imBoringView = MyPlayListsModule.build()
         imBoringView.navigationItem.largeTitleDisplayMode = .always
         let navigation = UINavigationController(rootViewController: imBoringView)
         return navigation
