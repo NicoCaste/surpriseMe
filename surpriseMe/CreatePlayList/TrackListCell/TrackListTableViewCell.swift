@@ -8,7 +8,7 @@
 import UIKit
 import AVFAudio
 
-class TrackListTableViewCell: UITableViewCell {
+class TrackListTableViewCell: UITableViewCell, AVAudioPlayerDelegate {
     lazy var trackImage: UIImageView = UIImageView()
     lazy var trackName: UILabel = UILabel()
     lazy var bandName: UILabel = UILabel()
@@ -16,6 +16,7 @@ class TrackListTableViewCell: UITableViewCell {
     lazy var playStopImage: UIImageView = UIImageView()
     var isPlaying: Bool = false
     var urlSong: String = ""
+    var player: AVAudioPlayer?
   
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super .init(style: style, reuseIdentifier: reuseIdentifier)
@@ -31,6 +32,7 @@ class TrackListTableViewCell: UITableViewCell {
         setTrackImage(image: trackWithImage.imageTrack)
         setTrackName(text: trackWithImage.track.name ?? "")
         setBandName(band: trackWithImage.track.artists.first??.name ?? "")
+        
     }
     
     //MARK: SetPlayStopButton
@@ -48,35 +50,59 @@ class TrackListTableViewCell: UITableViewCell {
     }
     
     @objc func playStopButtonAction() {
-        let nameImage = (isPlaying) ? "pause.circle.fill" : "play.circle.fill"
         isPlaying = !isPlaying
+        let nameImage = (isPlaying) ? "pause.circle.fill" : "play.circle.fill"
         playStopImage.image = UIImage(systemName: nameImage)
         contentView.reloadInputViews()
-        playStopMusic(urlString: urlSong)
+        if let player = player {
+            if player.isPlaying {
+                player.stop()
+                self.player = nil
+            }
+        } else {
+            playStopMusic(urlString: urlSong)
+        }
+        
     }
     
     func playStopMusic(urlString: String) {
         guard let url = URL(string: urlString) else {return}
-        let downloadSong: URLSessionDownloadTask = URLSession.shared.downloadTask(with: url, completionHandler: { urlNew, resp, er in
-               do {
-                   guard let urlLocal = urlNew else { return }
-                   try AVAudioSession.sharedInstance().setCategory(.playback, mode: .default)
-                   try AVAudioSession.sharedInstance().setActive(true)
-                   let player = try AVAudioPlayer(contentsOf: urlLocal)
-                   player.prepareToPlay()
-                   print(player.prepareToPlay())
-                   player.volume = 1.0
-                   player.play()
-                   print(player.isPlaying)
-               } catch let error as NSError {
-                   //self.player = nil
-                   print(error.localizedDescription)
-               } catch {
-                   print("AVAudioPlayer init failed")
-               }
+        downloadFileFromURL(url: url)
+    }
+    
+    func downloadFileFromURL(url:URL){
+
+        var downloadTask:URLSessionDownloadTask
+        downloadTask = URLSession.shared.downloadTask(with: url, completionHandler: { [weak self](URL, response, error) -> Void in
+            if let url = URL {
+                self?.play(url: url)
+            }
         })
-        downloadSong.resume()
+        downloadTask.resume()
+    }
+    
+    func play(url:URL) {
+        print("playing \(url)")
         
+        do {
+            self.player = try AVAudioPlayer(contentsOf: url)
+            player?.prepareToPlay()
+            player?.volume = 1.0
+            player?.play()
+        } catch let error as NSError {
+            //self.player = nil
+            print(error.localizedDescription)
+        } catch {
+            print("AVAudioPlayer init failed")
+        }
+        
+    }
+    
+    func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
+        playStopImage.image = UIImage(systemName: "play.circle.fill")
+        contentView.reloadInputViews()
+        player.stop()
+        self.player = nil
     }
     
     //MARK: SetPlayStopImage
