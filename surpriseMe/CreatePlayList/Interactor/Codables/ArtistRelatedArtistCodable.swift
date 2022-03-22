@@ -6,9 +6,15 @@
 //
 
 import Foundation
+import UIKit
 
 struct ArtistRelatedArtists: Codable {
     var artists: [Artist?]
+}
+
+struct ArtistWithImage {
+    var artist: Artist
+    var artistImage: UIImage
 }
 
 struct EditFeeling: Codable {

@@ -31,7 +31,7 @@ class ApiCaller {
                 let image = UIImage(data: data)
                 completion(image)
             } else {
-                completion(nil)
+                completion(UIImage(systemName: "camera.circel") ?? UIImage())
             }
         })
     }

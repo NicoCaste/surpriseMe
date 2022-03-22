@@ -11,13 +11,12 @@ class EditFeelingArtistsViewController: UIViewController, EditFeelingArtistsView
     var presenter: EditFeelingArtistsPresenterProtocol?
     var newArtistsTextField: UITextField = UITextField()
     var tableView: UITableView = UITableView()
-    lazy var saveFeelingArtistsButton: UIButton = UIButton()
+    lazy var createPlayListButton: UIButton = UIButton()
     lazy var addNewArtistsLabel: UILabel = UILabel()
     
     var keyboardActive: Bool = false
     var lookingForNewFavorite: Bool = false
     var needReload: Bool = true
-    var artistsAlreadyFavs: [Artist?] = []
     var key = ""
     
     override func viewDidLoad() {
@@ -25,6 +24,7 @@ class EditFeelingArtistsViewController: UIViewController, EditFeelingArtistsView
         key = FeelingCategories.getTitle(feeling: presenter?.feeling ?? .IWantALightsaber)
         title = key
         view.backgroundColor = .systemBackground
+        presenter?.getFavs(forKey: key)
         setAddNewArtistsLabel()
         setNewArtistsTextField()
         setCreatePlayListButton()
@@ -119,14 +119,7 @@ class EditFeelingArtistsViewController: UIViewController, EditFeelingArtistsView
     
     @objc func textFieldDidChange(_ textField: UITextField ) {
         guard let textFieldtext = textField.text else {return}
-        presenter?.findArtist(artist: textFieldtext, completion: { [weak self] matchArtist in
-            if let _ = matchArtist {
-                self?.lookingForNewFavorite = true
-            } else {
-                self?.lookingForNewFavorite = false
-            }
-            self?.tableView.reloadData()
-        })
+        presenter?.findArtist(artist: textFieldtext)
     }
     
     func setTableView() {
@@ -140,29 +133,31 @@ class EditFeelingArtistsViewController: UIViewController, EditFeelingArtistsView
         tableView.topAnchor.constraint(equalTo: newArtistsTextField.safeAreaLayoutGuide.bottomAnchor, constant: 10).isActive = true
         tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
         tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
-        tableView.bottomAnchor.constraint(equalTo: saveFeelingArtistsButton.topAnchor, constant: -10).isActive = true
+        tableView.bottomAnchor.constraint(equalTo: createPlayListButton.topAnchor, constant: -10).isActive = true
     }
     
     func setCreatePlayListButton() {
-        saveFeelingArtistsButton.translatesAutoresizingMaskIntoConstraints = false
-        saveFeelingArtistsButton.addTarget(self, action:  #selector(createPlayList), for: .touchUpInside)
-        view.addSubview(saveFeelingArtistsButton)
-        saveFeelingArtistsButton.setTitle("Create New Playlist", for: .normal)
-        saveFeelingArtistsButton.layer.masksToBounds = true
-        saveFeelingArtistsButton.layer.cornerRadius = 5
-        saveFeelingArtistsButton.backgroundColor = .systemBlue
+        createPlayListButton.translatesAutoresizingMaskIntoConstraints = false
+        createPlayListButton.addTarget(self, action:  #selector(createPlayList), for: .touchUpInside)
+        view.addSubview(createPlayListButton)
+        createPlayListButton.setTitle("Create New Playlist", for: .normal)
+        createPlayListButton.layer.masksToBounds = true
+        createPlayListButton.layer.cornerRadius = 5
+        createPlayListButton.backgroundColor = .systemBlue
         guard let newFont = UIFont(name: "Noto Sans Myanmar Bold", size: 18) else { return }
-        saveFeelingArtistsButton.titleLabel?.font = newFont
+        createPlayListButton.titleLabel?.font = newFont
         
-        saveFeelingArtistsButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -10).isActive = true
-        saveFeelingArtistsButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20).isActive = true
-        saveFeelingArtistsButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20).isActive = true
-        saveFeelingArtistsButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        createPlayListButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -10).isActive = true
+        createPlayListButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20).isActive = true
+        createPlayListButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20).isActive = true
+        createPlayListButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
     }
     
     @objc func createPlayList() {
         guard let feeling = presenter?.feeling else { return }
-        presenter?.goToCreateList(feeling: feeling, artists: artistsAlreadyFavs)
+        if !lookingForNewFavorite {
+            presenter?.goToCreateList(feeling: feeling, artists: presenter?.artistsMatch ?? [])
+        }
     }
     
     func tableNeedtoBeReloaded(itIsNecesary: Bool ) {
@@ -170,48 +165,53 @@ class EditFeelingArtistsViewController: UIViewController, EditFeelingArtistsView
         tableView.reloadData()
     }
     
+    private func showCreatePlayListButton() {
+        guard let artists = presenter?.artistsMatch?.count else { return }
+        if !lookingForNewFavorite {
+            createPlayListButton.isHidden = (artists > 0) ? false : true
+        }
+    }
+    
+    private func resetSearch() {
+        lookingForNewFavorite = false
+        newArtistsTextField.text = ""
+        presenter?.getFavs(forKey: key)
+        tableNeedtoBeReloaded(itIsNecesary: true)
+    }
+    
     //MARK: UITableViewDataSource
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if lookingForNewFavorite {
-            self.tableView.allowsSelection = true
-            guard let artistsCount = presenter?.artistsMatch?.count else { return 0 }
-            return artistsCount
-        } else {
-            EditFeelingArtistsPresenter.getFavs(forKey: key, completion: { [weak self] artists in
-                guard let self = self else { return }
-                self.tableView.allowsSelection = false
-                self.artistsAlreadyFavs = artists
-                if self.needReload {
-                    self.newArtistsTextField.text = ""
-                    self.tableNeedtoBeReloaded(itIsNecesary: false)
-                }
-            })
-            return artistsAlreadyFavs.count
-        }
+        self.tableView.allowsSelection = lookingForNewFavorite
+        guard let artists = presenter?.artistsMatch?.count else { return 0 }
+        showCreatePlayListButton()
+        return artists
+        
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "SurpriseMeTableViewCell") as? SurpriseMeTableViewCell
         guard let cell = cell else { return UITableViewCell()}
-        if lookingForNewFavorite {
-            guard let currentArtist = presenter?.artistsMatch?[indexPath.row] else { return UITableViewCell()}
-            cell.populate(imageUrl: currentArtist.images?.first?.url ?? "", text: currentArtist.name ?? "")
-        } else {
-            let imageUrl = artistsAlreadyFavs[indexPath.row]?.images?.first?.url ?? ""
-            cell.populate(imageUrl: imageUrl, text: artistsAlreadyFavs[indexPath.row]?.name ?? "")
+        if let matchArtistCount = presenter?.artistsMatch?.count {
+            if indexPath.row < matchArtistCount {
+                guard let currentArtist = presenter?.artistsMatch?[indexPath.row] else { return UITableViewCell()}
+                cell.populate(image: currentArtist.artistImage, text: currentArtist.artist.name ?? "")
+            }
         }
 
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let currentArtist = presenter?.artistsMatch?[indexPath.row] else { return }
-        presenter?.setFavList(forKey: key, fav: currentArtist, completion:{ [weak self] saveArtist in
-            if saveArtist {
-                self?.lookingForNewFavorite = false
-                self?.tableNeedtoBeReloaded(itIsNecesary: true)
+        if let matchArtistCount = presenter?.artistsMatch?.count {
+            if indexPath.row < matchArtistCount {
+                guard let currentArtist = presenter?.artistsMatch?[indexPath.row] else { return }
+                presenter?.setFavList(forKey: key, fav: currentArtist.artist, completion:{ [weak self] saveArtist in
+                    if saveArtist {
+                        self?.resetSearch()
+                    }
+                })
             }
-        })
+        }
     }
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
@@ -219,12 +219,11 @@ class EditFeelingArtistsViewController: UIViewController, EditFeelingArtistsView
             let actions: [UIContextualAction] = []
             return UISwipeActionsConfiguration(actions: actions)
         }
-            let currentArtist = artistsAlreadyFavs[indexPath.row]
+        let currentArtist = presenter?.artistsMatch?[indexPath.row].artist
             let deleteAction = UIContextualAction(style: .destructive, title: "Delete", handler: {[weak self] _,_,_ in
                 self?.presenter?.removeFav(forKey: self?.key ?? "", fav: currentArtist ?? Artist(), completion: {[weak self] artistsWasRemoved in
                     if artistsWasRemoved {
-                        self?.newArtistsTextField.text = ""
-                        self?.tableNeedtoBeReloaded(itIsNecesary: true)
+                        self?.resetSearch()
                     }
                 })
             })
