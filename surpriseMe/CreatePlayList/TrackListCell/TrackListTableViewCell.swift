@@ -8,15 +8,21 @@
 import UIKit
 import AVFAudio
 
-class TrackListTableViewCell: UITableViewCell, AVAudioPlayerDelegate {
-    lazy var trackImage: UIImageView = UIImageView()
-    lazy var trackName: UILabel = UILabel()
-    lazy var bandName: UILabel = UILabel()
-    lazy var playStopButton: UIButton = UIButton()
-    lazy var playStopImage: UIImageView = UIImageView()
-    var isPlaying: Bool = false
+protocol TrackListTableViewCellDelegate {
+    func newPlayer(cellPlayer: TrackListTableViewCell)
+}
+
+class TrackListTableViewCell: UITableViewCell, AVAudioPlayerDelegate  {
+    lazy private var trackImage: UIImageView = UIImageView()
+    lazy private var trackName: UILabel = UILabel()
+    lazy private var bandName: UILabel = UILabel()
+    lazy private var playStopButton: UIButton = UIButton()
+    lazy private var playStopImage: UIImageView = UIImageView()
     var urlSong: String = ""
-    var player: AVAudioPlayer?
+    var viewModel: TrackListCellModel?
+    var delegate: TrackListTableViewCellDelegate?
+    var index: Int?
+    var notificationCenter = NotificationCenter.default
   
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super .init(style: style, reuseIdentifier: reuseIdentifier)
@@ -26,17 +32,26 @@ class TrackListTableViewCell: UITableViewCell, AVAudioPlayerDelegate {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func populate(trackWithImage: TrackWithImage) {
+    func populate(trackWithImage: TrackWithImage, index: Int) {
+        viewModel = TrackListCellModel(viewIntance: self)
+        self.index = index
         setPlayStopButton(isPlayed: trackWithImage.track.isPlayable ?? false, urlString: trackWithImage.track.previewUrl ?? "")
         setPlayStopImage(isPlayed: trackWithImage.track.isPlayable ?? false)
         setTrackImage(image: trackWithImage.imageTrack)
         setTrackName(text: trackWithImage.track.name ?? "")
         setBandName(band: trackWithImage.track.artists.first??.name ?? "")
         
+        notificationCenter.addObserver(self, selector: #selector(pauseMusic), name: Notification.Name.playBackPaused, object: nil)
+    }
+    
+    @objc func pauseMusic() {
+        guard let model = viewModel else {return}
+        model.player?.stop()
+        model.player = nil
     }
     
     //MARK: SetPlayStopButton
-    func setPlayStopButton(isPlayed: Bool, urlString: String ) {
+    private func setPlayStopButton(isPlayed: Bool, urlString: String ) {
         playStopButton.isHidden = (isPlayed) ? false : true
         urlSong = urlString
         playStopButton.addTarget(self, action: #selector(playStopButtonAction), for: .touchUpInside)
@@ -49,66 +64,36 @@ class TrackListTableViewCell: UITableViewCell, AVAudioPlayerDelegate {
         playStopButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10).isActive = true
     }
     
-    @objc func playStopButtonAction() {
-        isPlaying = !isPlaying
-        let nameImage = (isPlaying) ? "pause.circle.fill" : "play.circle.fill"
-        playStopImage.image = UIImage(systemName: nameImage)
-        contentView.reloadInputViews()
-        if let player = player {
-            if player.isPlaying {
-                player.stop()
-                self.player = nil
-            }
+    @objc private func playStopButtonAction() {
+        guard let model = viewModel else {return}
+        if ((model.player?.isPlaying) != nil) {
+            model.player?.stop()
+            showPlayImage()
+            model.player = nil
         } else {
-            playStopMusic(urlString: urlSong)
+            showPuaseImage()
+            model.playStopMusic(urlString: urlSong)
         }
-        
-    }
-    
-    func playStopMusic(urlString: String) {
-        guard let url = URL(string: urlString) else {return}
-        downloadFileFromURL(url: url)
-    }
-    
-    func downloadFileFromURL(url:URL){
-
-        var downloadTask:URLSessionDownloadTask
-        downloadTask = URLSession.shared.downloadTask(with: url, completionHandler: { [weak self](URL, response, error) -> Void in
-            if let url = URL {
-                self?.play(url: url)
-            }
-        })
-        downloadTask.resume()
-    }
-    
-    func play(url:URL) {
-        print("playing \(url)")
-        
-        do {
-            self.player = try AVAudioPlayer(contentsOf: url)
-            player?.prepareToPlay()
-            player?.volume = 1.0
-            player?.play()
-        } catch let error as NSError {
-            //self.player = nil
-            print(error.localizedDescription)
-        } catch {
-            print("AVAudioPlayer init failed")
-        }
-        
     }
     
     func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
+        showPlayImage()
+        viewModel?.player?.stop()
+        viewModel?.player = nil
+    }
+    
+    func showPlayImage() {
         playStopImage.image = UIImage(systemName: "play.circle.fill")
-        contentView.reloadInputViews()
-        player.stop()
-        self.player = nil
+    }
+    
+    func showPuaseImage() {
+        playStopImage.image = UIImage(systemName: "pause.circle.fill")
     }
     
     //MARK: SetPlayStopImage
-    func setPlayStopImage(isPlayed: Bool) {
+    private func setPlayStopImage(isPlayed: Bool) {
         playStopImage.isHidden = (isPlayed) ? false : true
-        playStopImage.image = UIImage(systemName: "play.circle.fill")
+        showPlayImage()
         playStopImage.tintColor = .green
         playStopImage.translatesAutoresizingMaskIntoConstraints = false
         playStopButton.addSubview(playStopImage)
@@ -121,7 +106,7 @@ class TrackListTableViewCell: UITableViewCell, AVAudioPlayerDelegate {
     }
     
     //MARK: SetTrackName
-    func setTrackName(text: String) {
+    private func setTrackName(text: String) {
         trackName.text = text
         trackName.translatesAutoresizingMaskIntoConstraints = false
         contentView.addSubview(trackName)
@@ -134,7 +119,7 @@ class TrackListTableViewCell: UITableViewCell, AVAudioPlayerDelegate {
     }
     
     //MARK: SetBandName
-    func setBandName(band: String ) {
+    private func setBandName(band: String ) {
         bandName.translatesAutoresizingMaskIntoConstraints = false
         contentView.addSubview(bandName)
         bandName.text = band
@@ -147,7 +132,7 @@ class TrackListTableViewCell: UITableViewCell, AVAudioPlayerDelegate {
     }
     
     //MARK: SetTrackImage
-    func setTrackImage(image: UIImage) {
+    private func setTrackImage(image: UIImage) {
         trackImage.image = image
         trackImage.translatesAutoresizingMaskIntoConstraints = false
         contentView.addSubview(trackImage)

@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		034AF21FC59DFE58A6727D40 /* Pods_surpriseMe.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C730DC8CB5596CCAA2007365 /* Pods_surpriseMe.framework */; };
+		0E8F98FB27EB624D00E6D26B /* TrackListCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E8F98FA27EB624D00E6D26B /* TrackListCellModel.swift */; };
 		50084CCE2764CF8B0031ADF6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50084CCD2764CF8B0031ADF6 /* AppDelegate.swift */; };
 		50084CD02764CF8B0031ADF6 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50084CCF2764CF8B0031ADF6 /* SceneDelegate.swift */; };
 		50084CD72764CF8E0031ADF6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 50084CD62764CF8E0031ADF6 /* Assets.xcassets */; };
@@ -94,6 +95,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0E8F98FA27EB624D00E6D26B /* TrackListCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackListCellModel.swift; sourceTree = "<group>"; };
 		1A6F78FE3331DEEF5B514F5C /* Pods_surpriseMe_surpriseMeUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_surpriseMe_surpriseMeUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1F33D4A4327660D662D56C3B /* Pods_surpriseMeTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_surpriseMeTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4B22AC86B3C7D326739674EF /* Pods-surpriseMe.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-surpriseMe.debug.xcconfig"; path = "Target Support Files/Pods-surpriseMe/Pods-surpriseMe.debug.xcconfig"; sourceTree = "<group>"; };
@@ -645,6 +647,7 @@
 			isa = PBXGroup;
 			children = (
 				50084D8927683BD20031ADF6 /* TrackListTableViewCell.swift */,
+				0E8F98FA27EB624D00E6D26B /* TrackListCellModel.swift */,
 			);
 			path = TrackListCell;
 			sourceTree = "<group>";
@@ -1003,6 +1006,7 @@
 				50084D0E2764EE8D0031ADF6 /* AuthorizationViewController.swift in Sources */,
 				50E562A527C1187B00CFED94 /* EditFeelingArtistsTableViewCell.swift in Sources */,
 				50084D1B276508190031ADF6 /* MainAppCoordinator.swift in Sources */,
+				0E8F98FB27EB624D00E6D26B /* TrackListCellModel.swift in Sources */,
 				50084D5327662F620031ADF6 /* SurpriseMeRouter.swift in Sources */,
 				50084D162764F0850031ADF6 /* AuthorizationEntity.swift in Sources */,
 				50084D4D27662EB70031ADF6 /* SurpriseMeInteractor.swift in Sources */,

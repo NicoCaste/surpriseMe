@@ -12,6 +12,7 @@ class CreatePlayListViewController: UIViewController, CreatePlayListViewProtocol
     var tableView: UITableView = UITableView()
     lazy var createPlayListButton: UIButton = UIButton()
     var activityIndicator: UIActivityIndicatorView?
+    private var notificationCenter = NotificationCenter.default
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,6 +25,11 @@ class CreatePlayListViewController: UIViewController, CreatePlayListViewProtocol
         reloadList()
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        notificationCenter.post(name: NSNotification.Name.playBackPaused, object: nil)
+    }
+    
     func reloadList() {
         let navBarbutton = UIBarButtonItem.init(title: "", style: .done, target: self, action: #selector(giveMeAnother))
         navBarbutton.image = UIImage(systemName: "arrow.triangle.2.circlepath.circle.fill")
@@ -32,6 +38,7 @@ class CreatePlayListViewController: UIViewController, CreatePlayListViewProtocol
     }
     
     @objc func giveMeAnother() {
+        notificationCenter.post(name: NSNotification.Name.playBackPaused, object: nil)
         guard let presenter = presenter else { return }
         setActivityIndicator()
         presenter.getTrackRecommendation()
@@ -97,7 +104,8 @@ class CreatePlayListViewController: UIViewController, CreatePlayListViewProtocol
         let cell = tableView.dequeueReusableCell(withIdentifier: "TrackListTableViewCell") as! TrackListTableViewCell
         if indexPath.row < presenter.trackList.count {
           let track = presenter.trackList[indexPath.row]
-            cell.populate(trackWithImage: track)
+            cell.populate(trackWithImage: track, index: indexPath.row)
+            cell.delegate = presenter
         }
         return cell
     }
@@ -109,5 +117,12 @@ class CreatePlayListViewController: UIViewController, CreatePlayListViewProtocol
         })
         deleteAction.backgroundColor = .systemRed
         return UISwipeActionsConfiguration(actions: [deleteAction])
+    }
+}
+
+
+extension Notification.Name {
+    static var playBackPaused: Notification.Name {
+        return .init(rawValue: "AudioPlayer.playbackPaused")
     }
 }

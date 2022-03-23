@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import AVFAudio
 
 class CreatePlayListPresenter: CreatePlayListPresenterProtocol {
     var feeling: SurpriseMeFeeling?
@@ -17,6 +18,8 @@ class CreatePlayListPresenter: CreatePlayListPresenterProtocol {
     var playList: CreatePlayList?
     var selectedTracks: [Track] = []
     var trackList: [TrackWithImage] = []
+    var currentPlayer: TrackListTableViewCell?
+    var currentPlayerImage: UIImageView?
     
     func createPlayList() {
         interactor?.createPlayList(completion: {[weak self] newPlayList in
@@ -49,6 +52,21 @@ class CreatePlayListPresenter: CreatePlayListPresenterProtocol {
         if let urlOpen = urlOpen {
             UIApplication.shared.open(urlOpen)
         }
+    }
+    
+    func newPlayer(cellPlayer: TrackListTableViewCell) {
+            DispatchQueue.main.async {
+                if cellPlayer.index != self.currentPlayer?.index {
+                    if let index = self.currentPlayer?.index {
+                        let indexPath = IndexPath(row: index, section: 0)
+                        self.view?.tableView.reloadRows(at: [indexPath], with: .none)
+                    }
+                    self.currentPlayer?.showPlayImage()
+                }
+                cellPlayer.showPuaseImage()
+                self.currentPlayer?.viewModel?.player?.stop()
+                self.currentPlayer = cellPlayer
+            }
     }
     
     private func setTrackImage(tracks: [Track], completion: @escaping() -> Void) {
