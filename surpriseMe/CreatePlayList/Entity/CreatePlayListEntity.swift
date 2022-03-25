@@ -7,10 +7,11 @@
 
 import Foundation
 import UIKit
-import Alamofire
+import AVFAudio
 
 protocol CreatePlayListViewProtocol {
     var tableView: UITableView { get }
+    var createPlayListButton: UIButton { get }
     var activityIndicator: UIActivityIndicatorView? { get }
 }
 
@@ -19,14 +20,13 @@ protocol CreatePlayListInteractorProtocol {
     func createPlayList(completion: @escaping((CreatePlayList?) -> Void))
 }
 
-protocol CreatePlayListPresenterProtocol {
+protocol CreatePlayListPresenterProtocol: TrackListTableViewCellDelegate {
     var trackList: [TrackWithImage] { get set }
     var feeling: SurpriseMeFeeling? { get }
     var artists: [Artist?] { get }
     func createPlayList()
     func getTrackRecommendation()
 }
-
 
 protocol CreatePlayListRouterProtocol {
     func goToSorpriseMe()

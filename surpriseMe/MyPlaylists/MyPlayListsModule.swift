@@ -1,5 +1,5 @@
 //
-//  ImBoringModule.swift
+//  MyPlayListsModule.swift
 //  surpriseMe
 //
 //  Created by Nicolas Castello Luro on 11/12/2021.
@@ -7,10 +7,10 @@
 
 import UIKit
 
-final class ImBoringModule {
+final class MyPlayListsModule {
     
     static func build() -> UIViewController {
-        let view = ImBoringViewController()
+        let view = MyPlayListsViewController()
 //        let interactor = AuthorizationInteractor()
 //        let router = AuthorizationRouter()
 //        let presenter = AuthorizationPresenter()
