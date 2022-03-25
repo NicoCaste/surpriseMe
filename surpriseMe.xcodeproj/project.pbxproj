@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		034AF21FC59DFE58A6727D40 /* Pods_surpriseMe.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C730DC8CB5596CCAA2007365 /* Pods_surpriseMe.framework */; };
 		0E8F98FB27EB624D00E6D26B /* TrackListCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E8F98FA27EB624D00E6D26B /* TrackListCellModel.swift */; };
+		0E8F98FE27EDE9AC00E6D26B /* NotificationNameExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E8F98FD27EDE9AC00E6D26B /* NotificationNameExtension.swift */; };
+		0E8F990027EDEB6300E6D26B /* CGFloatExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E8F98FF27EDEB6300E6D26B /* CGFloatExtension.swift */; };
 		50084CCE2764CF8B0031ADF6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50084CCD2764CF8B0031ADF6 /* AppDelegate.swift */; };
 		50084CD02764CF8B0031ADF6 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50084CCF2764CF8B0031ADF6 /* SceneDelegate.swift */; };
 		50084CD72764CF8E0031ADF6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 50084CD62764CF8E0031ADF6 /* Assets.xcassets */; };
@@ -96,6 +98,8 @@
 
 /* Begin PBXFileReference section */
 		0E8F98FA27EB624D00E6D26B /* TrackListCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackListCellModel.swift; sourceTree = "<group>"; };
+		0E8F98FD27EDE9AC00E6D26B /* NotificationNameExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationNameExtension.swift; sourceTree = "<group>"; };
+		0E8F98FF27EDEB6300E6D26B /* CGFloatExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGFloatExtension.swift; sourceTree = "<group>"; };
 		1A6F78FE3331DEEF5B514F5C /* Pods_surpriseMe_surpriseMeUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_surpriseMe_surpriseMeUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1F33D4A4327660D662D56C3B /* Pods_surpriseMeTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_surpriseMeTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4B22AC86B3C7D326739674EF /* Pods-surpriseMe.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-surpriseMe.debug.xcconfig"; path = "Target Support Files/Pods-surpriseMe/Pods-surpriseMe.debug.xcconfig"; sourceTree = "<group>"; };
@@ -207,6 +211,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0E8F98FC27EDE99300E6D26B /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				0E8F98FD27EDE9AC00E6D26B /* NotificationNameExtension.swift */,
+				0E8F98FF27EDEB6300E6D26B /* CGFloatExtension.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
 		50084CC12764CF8A0031ADF6 = {
 			isa = PBXGroup;
 			children = (
@@ -243,6 +256,7 @@
 				50084CFD2764D05D0031ADF6 /* Welcome */,
 				50E562A827C124B100CFED94 /* FeelingCategories */,
 				50084D022764E42B0031ADF6 /* Networking */,
+				0E8F98FC27EDE99300E6D26B /* Extension */,
 				5036A9D427DC0F8A00957117 /* Utils */,
 				50084CCD2764CF8B0031ADF6 /* AppDelegate.swift */,
 				50084CCF2764CF8B0031ADF6 /* SceneDelegate.swift */,
@@ -1018,6 +1032,7 @@
 				50E5629B27C117B100CFED94 /* EditFeelingArtistsEntity.swift in Sources */,
 				50084D2627654D4B0031ADF6 /* TabBarModule.swift in Sources */,
 				50084D2A27654E410031ADF6 /* TabBarInteractor.swift in Sources */,
+				0E8F990027EDEB6300E6D26B /* CGFloatExtension.swift in Sources */,
 				50084D49276550C20031ADF6 /* SurpriseMeModule.swift in Sources */,
 				50084D2E27654EC60031ADF6 /* TabBarEntity.swift in Sources */,
 				50E5629F27C117CF00CFED94 /* EditFeelingArtistsInteractor.swift in Sources */,
@@ -1035,6 +1050,7 @@
 				50084D5D2766951D0031ADF6 /* ProfileDataTableViewCell.swift in Sources */,
 				50084D84276819C70031ADF6 /* ArtistRelatedArtistCodable.swift in Sources */,
 				50084D7A2767791E0031ADF6 /* CreatePlayListModule.swift in Sources */,
+				0E8F98FE27EDE9AC00E6D26B /* NotificationNameExtension.swift in Sources */,
 				50084D122764EF940031ADF6 /* AuthorizationRouter.swift in Sources */,
 				50084D452765503D0031ADF6 /* ProfileViewController.swift in Sources */,
 				50E562A727C119AA00CFED94 /* EditFeelingArtistsRouter.swift in Sources */,

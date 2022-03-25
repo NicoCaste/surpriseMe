@@ -120,9 +120,3 @@ class CreatePlayListViewController: UIViewController, CreatePlayListViewProtocol
     }
 }
 
-
-extension Notification.Name {
-    static var playBackPaused: Notification.Name {
-        return .init(rawValue: "AudioPlayer.playbackPaused")
-    }
-}

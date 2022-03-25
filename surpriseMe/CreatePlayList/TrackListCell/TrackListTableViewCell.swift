@@ -23,7 +23,7 @@ class TrackListTableViewCell: UITableViewCell, AVAudioPlayerDelegate  {
     var delegate: TrackListTableViewCellDelegate?
     var index: Int?
     var notificationCenter = NotificationCenter.default
-  
+    var segmentLayer: CAShapeLayer?
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super .init(style: style, reuseIdentifier: reuseIdentifier)
     }
@@ -34,6 +34,7 @@ class TrackListTableViewCell: UITableViewCell, AVAudioPlayerDelegate  {
     
     func populate(trackWithImage: TrackWithImage, index: Int) {
         viewModel = TrackListCellModel(viewIntance: self)
+        segmentLayer?.removeFromSuperlayer()
         self.index = index
         setPlayStopButton(isPlayed: trackWithImage.track.isPlayable ?? false, urlString: trackWithImage.track.previewUrl ?? "")
         setPlayStopImage(isPlayed: trackWithImage.track.isPlayable ?? false)
@@ -48,6 +49,38 @@ class TrackListTableViewCell: UITableViewCell, AVAudioPlayerDelegate  {
         guard let model = viewModel else {return}
         model.player?.stop()
         model.player = nil
+    }
+    
+    
+    // MARK: CreateCircle
+    private func createSegment(startAngle: CGFloat, endAngle: CGFloat) -> UIBezierPath {
+        let bezierPath = UIBezierPath(arcCenter: CGPoint(x: 30, y: 25), radius: 20, startAngle: startAngle.toRadians(), endAngle: endAngle.toRadians(), clockwise: true)
+        return bezierPath
+    }
+    
+    func createCircle(startAngle: CGFloat, endAngle: CGFloat, duration: CFTimeInterval) {
+        let segmentPath = createSegment(startAngle: startAngle, endAngle: endAngle)
+        segmentLayer = CAShapeLayer()
+        guard let segmentLayer = segmentLayer else {return}
+        segmentLayer.path = segmentPath.cgPath
+        segmentLayer.lineWidth = 5
+        segmentLayer.strokeColor = UIColor.systemBlue.cgColor
+        segmentLayer.fillColor = UIColor.clear.cgColor
+        DispatchQueue.main.async {
+            self.playStopButton.layer.addSublayer(segmentLayer)
+            self.addAnimation(to: segmentLayer, duration: duration)
+        }
+    }
+    
+    private func addAnimation(to layer: CALayer, duration: CFTimeInterval) {
+        let drawAnimation = CABasicAnimation(keyPath: "strokeEnd")
+        drawAnimation.duration = duration
+        drawAnimation.repeatCount = 1.0
+        drawAnimation.isRemovedOnCompletion = false
+        drawAnimation.fromValue = 0
+        drawAnimation.toValue = 1
+        drawAnimation.timingFunction = CAMediaTimingFunction(name: .easeOut)
+        layer.add(drawAnimation, forKey: "drawCircleAnimation")
     }
     
     //MARK: SetPlayStopButton
@@ -65,29 +98,32 @@ class TrackListTableViewCell: UITableViewCell, AVAudioPlayerDelegate  {
     }
     
     @objc private func playStopButtonAction() {
-        guard let model = viewModel else {return}
+        guard let model = viewModel else { return }
         if ((model.player?.isPlaying) != nil) {
             model.player?.stop()
             showPlayImage()
             model.player = nil
+            segmentLayer?.removeFromSuperlayer()
         } else {
-            showPuaseImage()
+            showStopImage()
             model.playStopMusic(urlString: urlSong)
         }
     }
     
+    // MARK: AVAudioPlayerDelegate
     func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
         showPlayImage()
         viewModel?.player?.stop()
         viewModel?.player = nil
+        segmentLayer?.removeFromSuperlayer()
     }
     
     func showPlayImage() {
         playStopImage.image = UIImage(systemName: "play.circle.fill")
     }
     
-    func showPuaseImage() {
-        playStopImage.image = UIImage(systemName: "pause.circle.fill")
+    func showStopImage() {
+        playStopImage.image = UIImage(systemName: "stop.circle.fill")
     }
     
     //MARK: SetPlayStopImage

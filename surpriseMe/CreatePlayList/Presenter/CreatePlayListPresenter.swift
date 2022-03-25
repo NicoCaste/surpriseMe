@@ -63,7 +63,7 @@ class CreatePlayListPresenter: CreatePlayListPresenterProtocol {
                     }
                     self.currentPlayer?.showPlayImage()
                 }
-                cellPlayer.showPuaseImage()
+                cellPlayer.showStopImage()
                 self.currentPlayer?.viewModel?.player?.stop()
                 self.currentPlayer = cellPlayer
             }

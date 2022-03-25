@@ -31,8 +31,6 @@ class TrackListCellModel {
     }
     
     private func play(url:URL) {
-        print("playing \(url)")
-        
         do {
             self.player = try AVAudioPlayer(contentsOf: url)
             self.viewInstance.delegate?.newPlayer(cellPlayer: viewInstance)
@@ -40,6 +38,9 @@ class TrackListCellModel {
             player?.prepareToPlay()
             player?.volume = 1.0
             player?.play()
+            
+            self.viewInstance.createCircle(startAngle: 0, endAngle: 360, duration: self.player?.duration ?? 0)
+
         } catch let error as NSError {
             //self.player = nil
             print(error.localizedDescription)
