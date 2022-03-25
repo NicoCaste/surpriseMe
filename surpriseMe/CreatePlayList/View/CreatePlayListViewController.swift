@@ -25,6 +25,10 @@ class CreatePlayListViewController: UIViewController, CreatePlayListViewProtocol
         reloadList()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        tableView.reloadData()
+    }
+    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         notificationCenter.post(name: NSNotification.Name.playBackPaused, object: nil)
@@ -82,7 +86,8 @@ class CreatePlayListViewController: UIViewController, CreatePlayListViewProtocol
     }
     
     func setActivityIndicator() {
-        tableView.isHidden = true 
+        tableView.isHidden = true
+        createPlayListButton.isHidden = true
         activityIndicator = UIActivityIndicatorView(style: .large)
         guard let activityIndicator = activityIndicator else { return }
         activityIndicator.translatesAutoresizingMaskIntoConstraints = false

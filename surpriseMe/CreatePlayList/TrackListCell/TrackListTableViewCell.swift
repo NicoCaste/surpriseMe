@@ -66,6 +66,7 @@ class TrackListTableViewCell: UITableViewCell, AVAudioPlayerDelegate  {
         segmentLayer.lineWidth = 5
         segmentLayer.strokeColor = UIColor.systemBlue.cgColor
         segmentLayer.fillColor = UIColor.clear.cgColor
+        segmentLayer.isHidden = true
         DispatchQueue.main.async {
             self.playStopButton.layer.addSublayer(segmentLayer)
             self.addAnimation(to: segmentLayer, duration: duration)
@@ -81,6 +82,9 @@ class TrackListTableViewCell: UITableViewCell, AVAudioPlayerDelegate  {
         drawAnimation.toValue = 1
         drawAnimation.timingFunction = CAMediaTimingFunction(name: .easeOut)
         layer.add(drawAnimation, forKey: "drawCircleAnimation")
+        DispatchQueue.main.async {
+            layer.isHidden = false
+        }
     }
     
     //MARK: SetPlayStopButton

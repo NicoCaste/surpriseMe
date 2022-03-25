@@ -11,6 +11,7 @@ import AVFAudio
 
 protocol CreatePlayListViewProtocol {
     var tableView: UITableView { get }
+    var createPlayListButton: UIButton { get }
     var activityIndicator: UIActivityIndicatorView? { get }
 }
 

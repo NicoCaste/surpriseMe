@@ -43,6 +43,7 @@ class CreatePlayListPresenter: CreatePlayListPresenterProtocol {
                 self?.view?.tableView.reloadData()
                 self?.view?.activityIndicator?.removeFromSuperview()
                 self?.view?.tableView.isHidden = false
+                self?.view?.createPlayListButton.isHidden = false 
             })
         })
     }
