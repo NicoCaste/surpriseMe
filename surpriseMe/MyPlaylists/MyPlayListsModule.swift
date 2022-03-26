@@ -11,16 +11,15 @@ final class MyPlayListsModule {
     
     static func build() -> UIViewController {
         let view = MyPlayListsViewController()
-//        let interactor = AuthorizationInteractor()
-//        let router = AuthorizationRouter()
-//        let presenter = AuthorizationPresenter()
-//        view.completionHandler = completionHandler
-//        presenter.view = view
-//        presenter.interactor = interactor
-//        presenter.router = router
-//        view.presenter = presenter
-//        interactor.presenter = presenter
-//        router.viewController = view
+        let interactor = MyPlaylistsInteractor()
+        let router = MyPlaylistsRouter()
+        let presenter = MyPlaylistsPresenter()
+        presenter.view = view
+        presenter.interactor = interactor
+        presenter.router = router
+        view.presenter = presenter
+        interactor.presenter = presenter
+        router.viewController = view
         return view
     }
 }

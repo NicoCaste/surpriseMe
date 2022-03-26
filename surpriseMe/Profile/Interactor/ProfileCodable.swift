@@ -49,6 +49,8 @@ struct ExplicitContent: Codable {
 
 struct ExternalUrl: Codable {
     var spotify: String?
+    var id: String?
+    var href: String?
 }
 
 struct Followers: Codable {
