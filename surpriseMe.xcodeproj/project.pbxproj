@@ -8,9 +8,15 @@
 
 /* Begin PBXBuildFile section */
 		034AF21FC59DFE58A6727D40 /* Pods_surpriseMe.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C730DC8CB5596CCAA2007365 /* Pods_surpriseMe.framework */; };
+		0E45B15527EF726C0063591C /* MyPlayListsCodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E45B15427EF726C0063591C /* MyPlayListsCodable.swift */; };
+		0E45B15827EF80830063591C /* MyPlaylistTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E45B15727EF80830063591C /* MyPlaylistTableViewCell.swift */; };
 		0E8F98FB27EB624D00E6D26B /* TrackListCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E8F98FA27EB624D00E6D26B /* TrackListCellModel.swift */; };
 		0E8F98FE27EDE9AC00E6D26B /* NotificationNameExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E8F98FD27EDE9AC00E6D26B /* NotificationNameExtension.swift */; };
 		0E8F990027EDEB6300E6D26B /* CGFloatExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E8F98FF27EDEB6300E6D26B /* CGFloatExtension.swift */; };
+		0E8F990227EF61C300E6D26B /* MyPlaylistsInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E8F990127EF61C300E6D26B /* MyPlaylistsInteractor.swift */; };
+		0E8F990427EF61EB00E6D26B /* MyPlaylistsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E8F990327EF61EB00E6D26B /* MyPlaylistsPresenter.swift */; };
+		0E8F990627EF623200E6D26B /* MyPlaylistsEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E8F990527EF623200E6D26B /* MyPlaylistsEntity.swift */; };
+		0E8F990827EF62B400E6D26B /* MyPlaylistsRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E8F990727EF62B400E6D26B /* MyPlaylistsRouter.swift */; };
 		50084CCE2764CF8B0031ADF6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50084CCD2764CF8B0031ADF6 /* AppDelegate.swift */; };
 		50084CD02764CF8B0031ADF6 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50084CCF2764CF8B0031ADF6 /* SceneDelegate.swift */; };
 		50084CD72764CF8E0031ADF6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 50084CD62764CF8E0031ADF6 /* Assets.xcassets */; };
@@ -34,7 +40,7 @@
 		50084D2C27654E780031ADF6 /* TabBarPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50084D2B27654E780031ADF6 /* TabBarPresenter.swift */; };
 		50084D2E27654EC60031ADF6 /* TabBarEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50084D2D27654EC60031ADF6 /* TabBarEntity.swift */; };
 		50084D3027654F180031ADF6 /* TabBarRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50084D2F27654F180031ADF6 /* TabBarRouter.swift */; };
-		50084D41276550020031ADF6 /* ImBoringViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50084D40276550020031ADF6 /* ImBoringViewController.swift */; };
+		50084D41276550020031ADF6 /* MyPlaylistsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50084D40276550020031ADF6 /* MyPlaylistsViewController.swift */; };
 		50084D432765502C0031ADF6 /* SurpriseMeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50084D422765502C0031ADF6 /* SurpriseMeViewController.swift */; };
 		50084D452765503D0031ADF6 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50084D442765503D0031ADF6 /* ProfileViewController.swift */; };
 		50084D47276550790031ADF6 /* ProfileModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50084D46276550790031ADF6 /* ProfileModule.swift */; };
@@ -97,9 +103,15 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0E45B15427EF726C0063591C /* MyPlayListsCodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPlayListsCodable.swift; sourceTree = "<group>"; };
+		0E45B15727EF80830063591C /* MyPlaylistTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPlaylistTableViewCell.swift; sourceTree = "<group>"; };
 		0E8F98FA27EB624D00E6D26B /* TrackListCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackListCellModel.swift; sourceTree = "<group>"; };
 		0E8F98FD27EDE9AC00E6D26B /* NotificationNameExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationNameExtension.swift; sourceTree = "<group>"; };
 		0E8F98FF27EDEB6300E6D26B /* CGFloatExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGFloatExtension.swift; sourceTree = "<group>"; };
+		0E8F990127EF61C300E6D26B /* MyPlaylistsInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MyPlaylistsInteractor.swift; path = surpriseMe/MyPlaylists/Interactor/MyPlaylistsInteractor.swift; sourceTree = SOURCE_ROOT; };
+		0E8F990327EF61EB00E6D26B /* MyPlaylistsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MyPlaylistsPresenter.swift; path = surpriseMe/MyPlaylists/Presenter/MyPlaylistsPresenter.swift; sourceTree = SOURCE_ROOT; };
+		0E8F990527EF623200E6D26B /* MyPlaylistsEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MyPlaylistsEntity.swift; path = surpriseMe/MyPlaylists/Entity/MyPlaylistsEntity.swift; sourceTree = SOURCE_ROOT; };
+		0E8F990727EF62B400E6D26B /* MyPlaylistsRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MyPlaylistsRouter.swift; path = surpriseMe/MyPlaylists/Router/MyPlaylistsRouter.swift; sourceTree = SOURCE_ROOT; };
 		1A6F78FE3331DEEF5B514F5C /* Pods_surpriseMe_surpriseMeUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_surpriseMe_surpriseMeUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1F33D4A4327660D662D56C3B /* Pods_surpriseMeTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_surpriseMeTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4B22AC86B3C7D326739674EF /* Pods-surpriseMe.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-surpriseMe.debug.xcconfig"; path = "Target Support Files/Pods-surpriseMe/Pods-surpriseMe.debug.xcconfig"; sourceTree = "<group>"; };
@@ -130,7 +142,7 @@
 		50084D2B27654E780031ADF6 /* TabBarPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarPresenter.swift; sourceTree = "<group>"; };
 		50084D2D27654EC60031ADF6 /* TabBarEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarEntity.swift; sourceTree = "<group>"; };
 		50084D2F27654F180031ADF6 /* TabBarRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarRouter.swift; sourceTree = "<group>"; };
-		50084D40276550020031ADF6 /* ImBoringViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImBoringViewController.swift; sourceTree = "<group>"; };
+		50084D40276550020031ADF6 /* MyPlaylistsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPlaylistsViewController.swift; sourceTree = "<group>"; };
 		50084D422765502C0031ADF6 /* SurpriseMeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurpriseMeViewController.swift; sourceTree = "<group>"; };
 		50084D442765503D0031ADF6 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		50084D46276550790031ADF6 /* ProfileModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileModule.swift; sourceTree = "<group>"; };
@@ -211,6 +223,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0E45B15627EF805D0063591C /* MyPlayListCell */ = {
+			isa = PBXGroup;
+			children = (
+				0E45B15727EF80830063591C /* MyPlaylistTableViewCell.swift */,
+			);
+			path = MyPlayListCell;
+			sourceTree = "<group>";
+		};
 		0E8F98FC27EDE99300E6D26B /* Extension */ = {
 			isa = PBXGroup;
 			children = (
@@ -218,6 +238,39 @@
 				0E8F98FF27EDEB6300E6D26B /* CGFloatExtension.swift */,
 			);
 			path = Extension;
+			sourceTree = "<group>";
+		};
+		0E8F990B27EF650F00E6D26B /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				0E8F990327EF61EB00E6D26B /* MyPlaylistsPresenter.swift */,
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		0E8F990C27EF652100E6D26B /* Entity */ = {
+			isa = PBXGroup;
+			children = (
+				0E8F990527EF623200E6D26B /* MyPlaylistsEntity.swift */,
+			);
+			path = Entity;
+			sourceTree = "<group>";
+		};
+		0E8F990D27EF655C00E6D26B /* Router */ = {
+			isa = PBXGroup;
+			children = (
+				0E8F990727EF62B400E6D26B /* MyPlaylistsRouter.swift */,
+			);
+			path = Router;
+			sourceTree = "<group>";
+		};
+		0E8F990E27EF656800E6D26B /* Interactor */ = {
+			isa = PBXGroup;
+			children = (
+				0E8F990127EF61C300E6D26B /* MyPlaylistsInteractor.swift */,
+				0E45B15427EF726C0063591C /* MyPlayListsCodable.swift */,
+			);
+			path = Interactor;
 			sourceTree = "<group>";
 		};
 		50084CC12764CF8A0031ADF6 = {
@@ -408,11 +461,12 @@
 		50084D1F27654CC70031ADF6 /* MyPlaylists */ = {
 			isa = PBXGroup;
 			children = (
+				0E45B15627EF805D0063591C /* MyPlayListCell */,
 				50084D3F27654FEC0031ADF6 /* View */,
-				50084D3E27654FE30031ADF6 /* Interactor */,
-				50084D3D27654FD90031ADF6 /* Presenter */,
-				50084D3C27654FD20031ADF6 /* Entity */,
-				50084D3B27654FCD0031ADF6 /* Router */,
+				0E8F990E27EF656800E6D26B /* Interactor */,
+				0E8F990B27EF650F00E6D26B /* Presenter */,
+				0E8F990C27EF652100E6D26B /* Entity */,
+				0E8F990D27EF655C00E6D26B /* Router */,
 				50084D4A276550FD0031ADF6 /* MyPlayListsModule.swift */,
 			);
 			path = MyPlaylists;
@@ -539,38 +593,10 @@
 			path = View;
 			sourceTree = "<group>";
 		};
-		50084D3B27654FCD0031ADF6 /* Router */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Router;
-			sourceTree = "<group>";
-		};
-		50084D3C27654FD20031ADF6 /* Entity */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Entity;
-			sourceTree = "<group>";
-		};
-		50084D3D27654FD90031ADF6 /* Presenter */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Presenter;
-			sourceTree = "<group>";
-		};
-		50084D3E27654FE30031ADF6 /* Interactor */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Interactor;
-			sourceTree = "<group>";
-		};
 		50084D3F27654FEC0031ADF6 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				50084D40276550020031ADF6 /* ImBoringViewController.swift */,
+				50084D40276550020031ADF6 /* MyPlaylistsViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1016,13 +1042,17 @@
 				50E562AA27C124D200CFED94 /* FeelingCategories.swift in Sources */,
 				50084D5F27669B240031ADF6 /* ProfileInteractor.swift in Sources */,
 				50084D7C2767878D0031ADF6 /* CreatePlayListCodable.swift in Sources */,
+				0E45B15527EF726C0063591C /* MyPlayListsCodable.swift in Sources */,
+				0E8F990227EF61C300E6D26B /* MyPlaylistsInteractor.swift in Sources */,
 				50084D6127669B590031ADF6 /* ProfilePresenter.swift in Sources */,
 				50084D0E2764EE8D0031ADF6 /* AuthorizationViewController.swift in Sources */,
 				50E562A527C1187B00CFED94 /* EditFeelingArtistsTableViewCell.swift in Sources */,
+				0E8F990627EF623200E6D26B /* MyPlaylistsEntity.swift in Sources */,
 				50084D1B276508190031ADF6 /* MainAppCoordinator.swift in Sources */,
 				0E8F98FB27EB624D00E6D26B /* TrackListCellModel.swift in Sources */,
 				50084D5327662F620031ADF6 /* SurpriseMeRouter.swift in Sources */,
 				50084D162764F0850031ADF6 /* AuthorizationEntity.swift in Sources */,
+				0E8F990427EF61EB00E6D26B /* MyPlaylistsPresenter.swift in Sources */,
 				50084D4D27662EB70031ADF6 /* SurpriseMeInteractor.swift in Sources */,
 				50084D2C27654E780031ADF6 /* TabBarPresenter.swift in Sources */,
 				50E5629D27C117C100CFED94 /* EditFeelingArtistsPresenter.swift in Sources */,
@@ -1030,6 +1060,7 @@
 				50084CCE2764CF8B0031ADF6 /* AppDelegate.swift in Sources */,
 				50084CD02764CF8B0031ADF6 /* SceneDelegate.swift in Sources */,
 				50E5629B27C117B100CFED94 /* EditFeelingArtistsEntity.swift in Sources */,
+				0E8F990827EF62B400E6D26B /* MyPlaylistsRouter.swift in Sources */,
 				50084D2627654D4B0031ADF6 /* TabBarModule.swift in Sources */,
 				50084D2A27654E410031ADF6 /* TabBarInteractor.swift in Sources */,
 				0E8F990027EDEB6300E6D26B /* CGFloatExtension.swift in Sources */,
@@ -1044,7 +1075,7 @@
 				50084D78276775CC0031ADF6 /* CreatePlayListRouter.swift in Sources */,
 				50E562A127C1184A00CFED94 /* EditFeelingArtistsModule.swift in Sources */,
 				50084D6F2767757D0031ADF6 /* CreatePlayListViewController.swift in Sources */,
-				50084D41276550020031ADF6 /* ImBoringViewController.swift in Sources */,
+				50084D41276550020031ADF6 /* MyPlaylistsViewController.swift in Sources */,
 				50084D8A27683BD20031ADF6 /* TrackListTableViewCell.swift in Sources */,
 				50084D76276775BB0031ADF6 /* CreatePlayListEntity.swift in Sources */,
 				50084D5D2766951D0031ADF6 /* ProfileDataTableViewCell.swift in Sources */,
@@ -1055,6 +1086,7 @@
 				50084D452765503D0031ADF6 /* ProfileViewController.swift in Sources */,
 				50E562A727C119AA00CFED94 /* EditFeelingArtistsRouter.swift in Sources */,
 				50084D5927667B7A0031ADF6 /* ProfileImageTableViewCell.swift in Sources */,
+				0E45B15827EF80830063591C /* MyPlaylistTableViewCell.swift in Sources */,
 				50084D74276775AF0031ADF6 /* CreatePlayListPresenter.swift in Sources */,
 				50084D4F27662EF50031ADF6 /* SurpriseMePresenter.swift in Sources */,
 				50084D5B27667C870031ADF6 /* ApiCaller.swift in Sources */,
