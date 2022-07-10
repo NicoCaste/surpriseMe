@@ -18,4 +18,12 @@ extension Notification.Name {
     static var reloadArtistsMatch: Notification.Name {
         return .init(rawValue: "reloadArtistsMatch")
     }
+    
+    static var recibeData: Notification.Name {
+        return .init(rawValue: "recibeData")
+    }
+    
+    static var withoutData: NSNotification.Name {
+        return .init(rawValue: "whithoutData")
+    }
 }

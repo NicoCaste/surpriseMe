@@ -17,6 +17,8 @@ class CreatePlayListViewController: UIViewController, CreatePlayListViewProtocol
     override func viewDidLoad() {
         super.viewDidLoad()
         notificationCenter.addObserver(self, selector: #selector(showErrorView(_:)), name: NSNotification.Name.showErrorView, object: nil)
+        notificationCenter.addObserver(self, selector: #selector(setReloadView), name: NSNotification.Name.recibeData, object: nil)
+        notificationCenter.addObserver(self, selector: #selector(withoutData), name: NSNotification.Name.withoutData, object: nil)
         title = "newPlayList".localized()
         view.backgroundColor = .systemBackground
         setActivityIndicator()
@@ -30,13 +32,11 @@ class CreatePlayListViewController: UIViewController, CreatePlayListViewProtocol
         tableView.reloadData()
     }
     
-    @objc func showErrorView(_ error: Notification) {
-        guard let errorMessage = error.userInfo  else { return }
-        let detailError = errorMessage["errorMessage"]
-        let errorView = ErrorViewViewController()
-        
-        errorView.errorMessage = detailError as? ErrorMessage
-        self.present(errorView, animated: true)
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        notificationCenter.removeObserver(self, name: NSNotification.Name.recibeData, object: nil)
+        notificationCenter.removeObserver(self, name: NSNotification.Name.withoutData, object: nil)
+        notificationCenter.removeObserver(self, name: NSNotification.Name.showErrorView, object: nil)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -57,6 +57,26 @@ class CreatePlayListViewController: UIViewController, CreatePlayListViewProtocol
         guard let presenter = presenter else { return }
         setActivityIndicator()
         presenter.getTrackRecommendation()
+    }
+    
+    // MARK: - ObserverSelector
+    @objc func showErrorView(_ error: Notification) {
+        guard let errorMessage = error.userInfo  else { return }
+        let detailError = errorMessage["errorMessage"]
+        let errorView = ErrorViewViewController()
+        
+        errorView.errorMessage = detailError as? ErrorMessage
+        self.present(errorView, animated: true)
+    }
+    
+    @objc func withoutData() {
+        perform(#selector(closeAll), with: nil, afterDelay: 5)
+    }
+    
+    @objc func closeAll() {
+        self.dismiss(animated: true, completion: {
+            _ = self.navigationController?.popToRootViewController(animated: true)
+        })
     }
     
     //MARK: SetCreatePlayListButton
@@ -107,6 +127,13 @@ class CreatePlayListViewController: UIViewController, CreatePlayListViewProtocol
         activityIndicator.startAnimating()
         activityIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         activityIndicator.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+    }
+    
+    @objc func setReloadView() {
+        tableView.reloadData()
+        activityIndicator?.removeFromSuperview()
+        tableView.isHidden = false
+        createPlayListButton.isHidden = false
     }
     
     //MARK: UITableViewDataSource

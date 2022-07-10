@@ -62,7 +62,7 @@ class AuthorizationInteractor: AuthorizationInteractorProtocol {
         let fiveMinutes: TimeInterval = 300
         return currentDate.addingTimeInterval(fiveMinutes) >= tokenExpirationDate
     }
-    
+    //TODO: - refactor networking 
     // MARK: - ExchangeCodeForToken
     func exchangeCodeForToken(code: String, completion: @escaping((Bool) -> Void)) {
         guard let url = URL(string: Constant.tokenApiURL) else { return }

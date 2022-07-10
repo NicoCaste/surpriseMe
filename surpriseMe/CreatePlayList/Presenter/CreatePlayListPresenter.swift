@@ -32,8 +32,8 @@ class CreatePlayListPresenter: CreatePlayListPresenterProtocol {
     func getTrackRecommendation() {
         interactor?.getTrackRecommendations(completion: { [weak self] trackList in
             if trackList.isEmpty {
-                //TODO: - make popup or view empty list
-                self?.view?.activityIndicator?.removeFromSuperview()
+                ShowErrorManager.showErrorView(title: "ups".localized(), description: "errorTrackRecommendation".localized())
+                NotificationCenter.default.post(name: NSNotification.Name.withoutData, object: nil)
             }
             for newTracks in trackList {
                 for track in newTracks.tracks {
@@ -44,10 +44,7 @@ class CreatePlayListPresenter: CreatePlayListPresenterProtocol {
             let shuffledTracks = allTracks.shuffled()
             self?.selectedTracks = Array(shuffledTracks.prefix(99))
             self?.setTrackImage(tracks: self?.selectedTracks ?? [], completion: {
-                self?.view?.tableView.reloadData()
-                self?.view?.activityIndicator?.removeFromSuperview()
-                self?.view?.tableView.isHidden = false
-                self?.view?.createPlayListButton.isHidden = false 
+                NotificationCenter.default.post(name: NSNotification.Name.recibeData, object: nil)
             })
         })
     }
