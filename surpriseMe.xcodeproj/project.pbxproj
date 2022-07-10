@@ -17,6 +17,10 @@
 		0E8F990427EF61EB00E6D26B /* MyPlaylistsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E8F990327EF61EB00E6D26B /* MyPlaylistsPresenter.swift */; };
 		0E8F990627EF623200E6D26B /* MyPlaylistsEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E8F990527EF623200E6D26B /* MyPlaylistsEntity.swift */; };
 		0E8F990827EF62B400E6D26B /* MyPlaylistsRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E8F990727EF62B400E6D26B /* MyPlaylistsRouter.swift */; };
+		0EE8E3432879C2A700340D67 /* ApiKeyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EE8E3422879C2A700340D67 /* ApiKeyManager.swift */; };
+		0EE8E3462879C7AE00340D67 /* WebService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EE8E3452879C7AE00340D67 /* WebService.swift */; };
+		0EE8E3492879C87500340D67 /* SurpriseMeApiRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EE8E3482879C87500340D67 /* SurpriseMeApiRepository.swift */; };
+		0EE8E34C2879E40600340D67 /* AlamofireWebService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EE8E34B2879E40600340D67 /* AlamofireWebService.swift */; };
 		50084CCE2764CF8B0031ADF6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50084CCD2764CF8B0031ADF6 /* AppDelegate.swift */; };
 		50084CD02764CF8B0031ADF6 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50084CCF2764CF8B0031ADF6 /* SceneDelegate.swift */; };
 		50084CD72764CF8E0031ADF6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 50084CD62764CF8E0031ADF6 /* Assets.xcassets */; };
@@ -25,7 +29,6 @@
 		50084CEF2764CF8E0031ADF6 /* surpriseMeUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50084CEE2764CF8E0031ADF6 /* surpriseMeUITests.swift */; };
 		50084CF12764CF8E0031ADF6 /* surpriseMeUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50084CF02764CF8E0031ADF6 /* surpriseMeUITestsLaunchTests.swift */; };
 		50084D002764D0760031ADF6 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50084CFE2764D0760031ADF6 /* WelcomeViewController.swift */; };
-		50084D042764E44B0031ADF6 /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50084D032764E44B0031ADF6 /* AuthManager.swift */; };
 		50084D0C2764ED9F0031ADF6 /* AuthModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50084D0B2764ED9F0031ADF6 /* AuthModule.swift */; };
 		50084D0E2764EE8D0031ADF6 /* AuthorizationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50084D0D2764EE8D0031ADF6 /* AuthorizationViewController.swift */; };
 		50084D102764EF5B0031ADF6 /* AuthorizationInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50084D0F2764EF5B0031ADF6 /* AuthorizationInteractor.swift */; };
@@ -112,6 +115,11 @@
 		0E8F990327EF61EB00E6D26B /* MyPlaylistsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MyPlaylistsPresenter.swift; path = surpriseMe/MyPlaylists/Presenter/MyPlaylistsPresenter.swift; sourceTree = SOURCE_ROOT; };
 		0E8F990527EF623200E6D26B /* MyPlaylistsEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MyPlaylistsEntity.swift; path = surpriseMe/MyPlaylists/Entity/MyPlaylistsEntity.swift; sourceTree = SOURCE_ROOT; };
 		0E8F990727EF62B400E6D26B /* MyPlaylistsRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MyPlaylistsRouter.swift; path = surpriseMe/MyPlaylists/Router/MyPlaylistsRouter.swift; sourceTree = SOURCE_ROOT; };
+		0EE8E3402879BCAB00340D67 /* Secrets.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Secrets.xcconfig; sourceTree = "<group>"; };
+		0EE8E3422879C2A700340D67 /* ApiKeyManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiKeyManager.swift; sourceTree = "<group>"; };
+		0EE8E3452879C7AE00340D67 /* WebService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebService.swift; sourceTree = "<group>"; };
+		0EE8E3482879C87500340D67 /* SurpriseMeApiRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurpriseMeApiRepository.swift; sourceTree = "<group>"; };
+		0EE8E34B2879E40600340D67 /* AlamofireWebService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlamofireWebService.swift; sourceTree = "<group>"; };
 		1A6F78FE3331DEEF5B514F5C /* Pods_surpriseMe_surpriseMeUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_surpriseMe_surpriseMeUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1F33D4A4327660D662D56C3B /* Pods_surpriseMeTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_surpriseMeTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4B22AC86B3C7D326739674EF /* Pods-surpriseMe.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-surpriseMe.debug.xcconfig"; path = "Target Support Files/Pods-surpriseMe/Pods-surpriseMe.debug.xcconfig"; sourceTree = "<group>"; };
@@ -127,7 +135,6 @@
 		50084CEE2764CF8E0031ADF6 /* surpriseMeUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = surpriseMeUITests.swift; sourceTree = "<group>"; };
 		50084CF02764CF8E0031ADF6 /* surpriseMeUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = surpriseMeUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		50084CFE2764D0760031ADF6 /* WelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
-		50084D032764E44B0031ADF6 /* AuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
 		50084D0B2764ED9F0031ADF6 /* AuthModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthModule.swift; sourceTree = "<group>"; };
 		50084D0D2764EE8D0031ADF6 /* AuthorizationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationViewController.swift; sourceTree = "<group>"; };
 		50084D0F2764EF5B0031ADF6 /* AuthorizationInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationInteractor.swift; sourceTree = "<group>"; };
@@ -273,9 +280,50 @@
 			path = Interactor;
 			sourceTree = "<group>";
 		};
+		0EE8E33F2879BC8900340D67 /* ManagingSecrets */ = {
+			isa = PBXGroup;
+			children = (
+				0EE8E3402879BCAB00340D67 /* Secrets.xcconfig */,
+			);
+			path = ManagingSecrets;
+			sourceTree = "<group>";
+		};
+		0EE8E3412879C29500340D67 /* ApiKeyManager */ = {
+			isa = PBXGroup;
+			children = (
+				0EE8E3422879C2A700340D67 /* ApiKeyManager.swift */,
+			);
+			path = ApiKeyManager;
+			sourceTree = "<group>";
+		};
+		0EE8E3442879C7A100340D67 /* Protocol */ = {
+			isa = PBXGroup;
+			children = (
+				0EE8E3452879C7AE00340D67 /* WebService.swift */,
+			);
+			path = Protocol;
+			sourceTree = "<group>";
+		};
+		0EE8E3472879C83F00340D67 /* Repository */ = {
+			isa = PBXGroup;
+			children = (
+				0EE8E3482879C87500340D67 /* SurpriseMeApiRepository.swift */,
+			);
+			path = Repository;
+			sourceTree = "<group>";
+		};
+		0EE8E34A2879E3F500340D67 /* Service  */ = {
+			isa = PBXGroup;
+			children = (
+				0EE8E34B2879E40600340D67 /* AlamofireWebService.swift */,
+			);
+			path = "Service ";
+			sourceTree = "<group>";
+		};
 		50084CC12764CF8A0031ADF6 = {
 			isa = PBXGroup;
 			children = (
+				0EE8E33F2879BC8900340D67 /* ManagingSecrets */,
 				50084CCC2764CF8B0031ADF6 /* surpriseMe */,
 				50084CE32764CF8E0031ADF6 /* surpriseMeTests */,
 				50084CED2764CF8E0031ADF6 /* surpriseMeUITests */,
@@ -348,8 +396,11 @@
 		50084D022764E42B0031ADF6 /* Networking */ = {
 			isa = PBXGroup;
 			children = (
+				0EE8E34A2879E3F500340D67 /* Service  */,
+				0EE8E3472879C83F00340D67 /* Repository */,
+				0EE8E3442879C7A100340D67 /* Protocol */,
+				0EE8E3412879C29500340D67 /* ApiKeyManager */,
 				50084D17276507AF0031ADF6 /* Coordinators */,
-				50084D032764E44B0031ADF6 /* AuthManager.swift */,
 				50084D5A27667C870031ADF6 /* ApiCaller.swift */,
 			);
 			path = Networking;
@@ -1041,8 +1092,10 @@
 				5036A9D627DC0FA000957117 /* ActivityIndicator.swift in Sources */,
 				50E562AA27C124D200CFED94 /* FeelingCategories.swift in Sources */,
 				50084D5F27669B240031ADF6 /* ProfileInteractor.swift in Sources */,
+				0EE8E34C2879E40600340D67 /* AlamofireWebService.swift in Sources */,
 				50084D7C2767878D0031ADF6 /* CreatePlayListCodable.swift in Sources */,
 				0E45B15527EF726C0063591C /* MyPlayListsCodable.swift in Sources */,
+				0EE8E3492879C87500340D67 /* SurpriseMeApiRepository.swift in Sources */,
 				0E8F990227EF61C300E6D26B /* MyPlaylistsInteractor.swift in Sources */,
 				50084D6127669B590031ADF6 /* ProfilePresenter.swift in Sources */,
 				50084D0E2764EE8D0031ADF6 /* AuthorizationViewController.swift in Sources */,
@@ -1066,6 +1119,7 @@
 				0E8F990027EDEB6300E6D26B /* CGFloatExtension.swift in Sources */,
 				50084D49276550C20031ADF6 /* SurpriseMeModule.swift in Sources */,
 				50084D2E27654EC60031ADF6 /* TabBarEntity.swift in Sources */,
+				0EE8E3462879C7AE00340D67 /* WebService.swift in Sources */,
 				50E5629F27C117CF00CFED94 /* EditFeelingArtistsInteractor.swift in Sources */,
 				50084D102764EF5B0031ADF6 /* AuthorizationInteractor.swift in Sources */,
 				50084D87276826BB0031ADF6 /* ArtistTopTracksCodable.swift in Sources */,
@@ -1082,6 +1136,7 @@
 				50084D84276819C70031ADF6 /* ArtistRelatedArtistCodable.swift in Sources */,
 				50084D7A2767791E0031ADF6 /* CreatePlayListModule.swift in Sources */,
 				0E8F98FE27EDE9AC00E6D26B /* NotificationNameExtension.swift in Sources */,
+				0EE8E3432879C2A700340D67 /* ApiKeyManager.swift in Sources */,
 				50084D122764EF940031ADF6 /* AuthorizationRouter.swift in Sources */,
 				50084D452765503D0031ADF6 /* ProfileViewController.swift in Sources */,
 				50E562A727C119AA00CFED94 /* EditFeelingArtistsRouter.swift in Sources */,
@@ -1098,7 +1153,6 @@
 				50084D2827654DA60031ADF6 /* TabBarViewController.swift in Sources */,
 				50084D432765502C0031ADF6 /* SurpriseMeViewController.swift in Sources */,
 				50E562A327C1185E00CFED94 /* EditFeelingArtistsViewController.swift in Sources */,
-				50084D042764E44B0031ADF6 /* AuthManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1148,6 +1202,7 @@
 /* Begin XCBuildConfiguration section */
 		50084CF22764CF8E0031ADF6 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0EE8E3402879BCAB00340D67 /* Secrets.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -1209,6 +1264,7 @@
 		};
 		50084CF32764CF8E0031ADF6 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0EE8E3402879BCAB00340D67 /* Secrets.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;

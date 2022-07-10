@@ -20,12 +20,15 @@ class ApiCaller {
     
     func getImage(url: String, completion: @escaping(UIImage?) -> Void) {
         var imageUrl = url
+        
         if url.lowercased().contains("https") == false {
             imageUrl = "https://\(url)"
         }
+        
         if url.lowercased().contains("http") {
             imageUrl = imageUrl.replacingOccurrences(of: "http://", with: "", options: .literal)
         }
+        
         AF.download(imageUrl).responseData(completionHandler: { response in
             if let data = response.value {
                 let image = UIImage(data: data)

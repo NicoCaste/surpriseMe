@@ -164,6 +164,7 @@ class TrackListTableViewCell: UITableViewCell, AVAudioPlayerDelegate  {
         contentView.addSubview(bandName)
         bandName.text = band
         bandName.font = UIFont(name: "Noto Sans Myanmar semi Bold", size: 15)
+        
         bandName.leadingAnchor.constraint(equalTo: trackImage.trailingAnchor, constant: 20).isActive = true
         bandName.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10).isActive = true
         bandName.topAnchor.constraint(equalTo: trackName.bottomAnchor, constant: 10).isActive = true

@@ -8,74 +8,99 @@
 import UIKit
 import Alamofire
 
+struct Parameters: Codable {
+    var name: String?
+    var description: String?
+    var uris: [String]?
+    var id: String?
+    var market: String?
+}
+
 class CreatePlayListInteractor: CreatePlayListInteractorProtocol {
     var presenter: CreatePlayListPresenterProtocol?
     var userId: String?
     var topTracks: [ArtistsTopTracks] = []
+    let webService: WebService = AlamofireWebService()
+    let repository: SurpriseMeApiRepository
     
+    init() {
+        self.repository = SurpriseMeApiRepository(webService: webService)
+    }
+    
+    // MARK - CreatePlayList
     func createPlayList(completion: @escaping((CreatePlayList?) -> Void)) {
         userId = ProfileInteractor.getClientData(userData: .id)
         guard let userId = userId else { return }
+        let url = ApiCaller.shared.makeURL(url: "users/\(userId)/playlists")
+        let parameters = getCreatePlayListParameters()
         
-        AuthorizationInteractor.getToken(completion: {[weak self] token in
-            guard let token = token else { return }
-            guard let self = self else { return }
-            guard let presenter = self.presenter else { return }
-            
-            let headers: HTTPHeaders = [.authorization(bearerToken: token), .contentType("application/json")]
-            let playListParameters: [String: String] = ["name": FeelingCategories.getTitle(feeling: presenter.feeling ?? .IWantALightsaber),
-                                                  "description": "Create by SorpriseMe! app."]
-            let url = ApiCaller.shared.makeURL(url: "users/\(userId)/playlists")
-            AF.request( url, method: .post, parameters: playListParameters, encoder: JSONParameterEncoder.default, headers: headers).responseDecodable(of: CreatePlayList.self) {[weak self] newPlayList in
-                switch newPlayList.result {
-                case .success:
-                    self?.addTracksToPlayList(playListId: newPlayList.value?.id ?? "", completion: { snaptShot in
-                        completion(newPlayList.value)
-                    })
-                case .failure:
-                    completion(nil)
-                }
+        repository.createPlayList(baseUrl: url, parameters: parameters, endpoint: "", limit: 1, completion: {[weak self] result in
+            switch result {
+                case .success(let newPlayList):
+                self?.addTracksToPlayList(playListId: newPlayList.id ?? "", completion: { snaptShot in
+                    completion(newPlayList)
+                })
+            case .failure(let error ):
+                print(error)
+                break
             }
         })
     }
     
+    // MARK: - GetCreatePlayListParameters
+    private func getCreatePlayListParameters() -> Parameters {
+        guard let presenter = presenter else { return Parameters()}
+        return Parameters(name: FeelingCategories.getTitle(feeling: presenter.feeling ?? .IWantALightsaber), description:"Create by SorpriseMe! app.")
+    }
     
-    private func addTracksToPlayList(playListId: String, completion: @escaping((DataResponse<AddTracksToPlayListResponse, AFError>) -> Void)) {
-        var tracksId: [String] = []
-        presenter?.trackList.forEach({tracksId.append($0.track.id ?? "")})
-        AuthorizationInteractor.getToken(completion: { token in
-            guard let token = token else { return }
-            let headers: HTTPHeaders = [.authorization(bearerToken: token), .contentType("application/json")]
-            var tracksParametersList: [String] = []
-            tracksId.forEach({
-                let tracksParameters =  "spotify:track:\($0)"
-                tracksParametersList.append(tracksParameters)
-            })
-            
-            let url = ApiCaller.shared.makeURL(url: "playlists/\(playListId)/tracks")
-            AF.request(url, method: .post, parameters: ["uris" : tracksParametersList], encoder: JSONParameterEncoder.default, headers: headers).responseDecodable(of: AddTracksToPlayListResponse.self) { snapShot in
-                completion(snapShot)
-            }
+    // MARK: - AddTracksToPlayList
+    private func addTracksToPlayList(playListId: String, completion: @escaping((Result<AddTracksToPlayListResponse, Error>) -> Void)) {
+        let parameters = getAddTracksParameter()
+        let url = ApiCaller.shared.makeURL(url: "playlists/\(playListId)/tracks")
+        
+        repository.addTracksToPlayList(baseUrl: url, parameters: parameters, endpoint: "", limit: 1, completion: {
+            result in
+            completion(result)
         })
+    }
+    
+    // MARK: - GetAddTracksParameter
+    private func getAddTracksParameter() -> Parameters {
+        guard let presenter = presenter else { return Parameters()}
+        var tracksId: [String] = []
+        presenter.trackList.forEach({tracksId.append($0.track.id ?? "")})
+        var tracksParametersList: [String] = []
+        tracksId.forEach({
+            let tracksParameters =  "spotify:track:\($0)"
+            tracksParametersList.append(tracksParameters)
+        })
+        
+        return  Parameters(uris: tracksParametersList)
     }
     
     func getTrackRecommendations(completion: @escaping(([ArtistsTopTracks]) -> Void)) {
         guard let presenter = presenter else { return }
-        
         let searchArtistId = getRandomArtist(feeling: presenter.feeling ?? .IWantALightsaber)
-        AuthorizationInteractor.getToken(completion: {[weak self] token in
-            guard let token = token else { return }
-            let headers: HTTPHeaders = [.authorization(bearerToken: token), .contentType("application/json")]
-            let searchParameters = [ "id" : searchArtistId ]
-            let url = ApiCaller.shared.makeURL(url: "artists/\(searchArtistId)/related-artists")
-            
-            AF.request(url, parameters: searchParameters, headers: headers).responseDecodable(of: ArtistRelatedArtists.self) { artistList in
-                guard let artists = artistList.value else { return }
+        let parameters = getTrackRecommendartionsParameters()
+        let url = ApiCaller.shared.makeURL(url: "artists/\(searchArtistId)/related-artists")
+        
+        repository.getTrackRecommendations(baseUrl: url, parameters: parameters, endpoint: "", limit: 1, completion: {[weak self] artistList in
+            switch artistList {
+            case .success(let artists):
                 self?.getTopTracks(artists: artists.artists, completionTracks: {
                     completion(self?.topTracks ?? [])
                 })
+            case .failure(let error):
+                //TODO: Handler error
+                print(error)
             }
         })
+    }
+    
+    private func getTrackRecommendartionsParameters() -> Parameters {
+        guard let presenter = presenter else { return Parameters()}
+        let searchArtistId = getRandomArtist(feeling: presenter.feeling ?? .IWantALightsaber)
+        return Parameters(id: searchArtistId)
     }
     
     private func getTopTracks(artists: [Artist?], completionTracks: @escaping()-> Void) {
@@ -92,23 +117,24 @@ class CreatePlayListInteractor: CreatePlayListInteractorProtocol {
     }
     
     private func getArtistTracks(artistId: String?, completion: @escaping((ArtistsTopTracks)-> Void)) {
-        AuthorizationInteractor.getToken(completion: { token in
-            guard let token = token else { return }
             guard let artistId = artistId else { return }
-            let headers: HTTPHeaders = [.authorization(bearerToken: token), .contentType("application/json")]
-            let artistParameters = [ "id" : artistId,
-                                     "market": "ar"]
+            let parameters = self.getArtistTracksParameters(artistId: artistId)
             let url = ApiCaller.shared.makeURL(url: "artists/\(artistId)/top-tracks")
-            AF.request(url, parameters: artistParameters, headers: headers).responseDecodable(of: ArtistsTopTracks.self){ tracks in
-                switch tracks.result {
-                case .success:
-                    guard let topTracks = tracks.value else { return }
-                    completion(topTracks)
+            
+            repository.getArtistsTopTracks(baseUrl: url, parameters: parameters, endpoint: "", limit: 1, completion: { tracks in
+                switch tracks {
+                case .success(let topTraks):
+                    completion(topTraks)
                 case .failure:
+                    //TODO: Handler error
                     break
                 }
-            }
-        })
+                
+            })
+    }
+    
+    private func getArtistTracksParameters(artistId: String) -> Parameters {
+        Parameters(id: artistId, market: "ar")
     }
     
     private func getRandomArtist(feeling: SurpriseMeFeeling ) -> String {
@@ -117,4 +143,3 @@ class CreatePlayListInteractor: CreatePlayListInteractorProtocol {
         return artistsList[index]?.id ?? ""
     }
 }
-

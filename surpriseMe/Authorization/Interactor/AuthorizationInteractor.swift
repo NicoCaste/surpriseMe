@@ -26,8 +26,8 @@ class AuthorizationInteractor: AuthorizationInteractorProtocol {
     var presenter: AuthorizationPresenterProtocol?
     
     struct Constant {
-        static let clientId: String = "2653e7e59ec34be090f5d3b3a54f2f77"
-        static let secretId: String = "416efcdbb2a1405da43e0784432c6b62"
+        static let clientId = ApiKeyManager.getPublicClientId() ?? ""
+        static let secretId = ApiKeyManager.getSecretApiKey() ?? ""
         static let tokenApiURL: String = "https://accounts.spotify.com/api/token"
         static let redirectURI = "https://www.spotify.com/ar/"
         static let scopes = "user-read-private%20playlist-modify-public%20playlist-read-private%20playlist-modify-private%20playlist-read-collaborative%20user-follow-read%20user-library-modify%20user-library-read%20user-read-email"
@@ -63,6 +63,7 @@ class AuthorizationInteractor: AuthorizationInteractorProtocol {
         return currentDate.addingTimeInterval(fiveMinutes) >= tokenExpirationDate
     }
     
+    // MARK: - ExchangeCodeForToken
     func exchangeCodeForToken(code: String, completion: @escaping((Bool) -> Void)) {
         guard let url = URL(string: Constant.tokenApiURL) else { return }
         var components = URLComponents()
@@ -101,6 +102,7 @@ class AuthorizationInteractor: AuthorizationInteractorProtocol {
         task.resume()
     }
     
+    // MARK: - RefreshAccessToken
     static func refreshAccessToken(completion: @escaping((Bool) -> Void)) {
         guard shouldRefreshToken else { return }
         guard let refreshToken = refreshToken else { return }
@@ -113,6 +115,7 @@ class AuthorizationInteractor: AuthorizationInteractorProtocol {
             URLQueryItem(name: "refresh_token", value: refreshToken),
             URLQueryItem(name: "grant_type", value: "authorization_code")
         ]
+        
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.httpBody = components.query?.data(using: .utf8)
@@ -143,6 +146,7 @@ class AuthorizationInteractor: AuthorizationInteractorProtocol {
 
     }
     
+    // MARK: - CacheToken
     static private func cacheToken(result: AuthResponse) {
         UserDefaults.standard.setValue(result.accessToken, forKey: "access_token")
         if let refreshToken = result.refreshToken {
@@ -151,6 +155,7 @@ class AuthorizationInteractor: AuthorizationInteractorProtocol {
         UserDefaults.standard.setValue(Date().addingTimeInterval(TimeInterval(result.expiresIn ?? 0)), forKey: "expires_Date")
     }
     
+    // MARK: - GetToken
     static func getToken(completion: @escaping((String?)-> Void)) {
         var token: String?
         if AuthorizationInteractor.shouldRefreshToken {
