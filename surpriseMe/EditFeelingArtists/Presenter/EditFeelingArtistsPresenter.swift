@@ -14,8 +14,20 @@ class EditFeelingArtistsPresenter: EditFeelingArtistsPresenterProtocol {
     var router: EditFeelingArtistsRouterProtocol?
     var feeling: SurpriseMeFeeling?
     var artistsMatch: [ArtistWithImage]? = []
+    private var searchTimer: Timer?
+    private var timeInterval = 0.8
     
     func findArtist(artist: String) {
+        if searchTimer != nil {
+            searchTimer?.invalidate()
+            searchTimer = nil
+        }
+
+        searchTimer = Timer.scheduledTimer(timeInterval: timeInterval, target: self, selector: #selector(getArtist(_:)), userInfo: artist, repeats: false)
+    }
+    
+   @objc private func getArtist(_ timer: Timer) {
+        guard let artist: String = timer.userInfo as? String else { return }
         view?.lookingForNewFavorite = (artist != "") ? true : false
         if artist == "" {
             view?.tableView.reloadData()

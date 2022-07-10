@@ -16,6 +16,7 @@ class EditFeelingArtistsInteractor: EditFeelingArtistsInteractorProtocol {
     init() {
         self.repository = SurpriseMeApiRepository(webService: manager)
     }
+    
     func findArtist(artist: String, completion: @escaping((EditFeeling?) -> Void)) {
         let editArtist = artist.replacingOccurrences(of: " ", with: "%20")
         let url = ApiCaller.shared.makeURL(url: "search?q=\(editArtist)&type=artist&limit=10")
