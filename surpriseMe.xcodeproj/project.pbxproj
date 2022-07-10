@@ -22,6 +22,7 @@
 		0EA95A6E287B2371000D1EB5 /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EA95A6D287B2371000D1EB5 /* StringExtension.swift */; };
 		0EA95A70287B25BB000D1EB5 /* ShowErrorManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EA95A6F287B25BB000D1EB5 /* ShowErrorManager.swift */; };
 		0EA95A72287B2F4C000D1EB5 /* UIViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EA95A71287B2F4C000D1EB5 /* UIViewExtension.swift */; };
+		0EBA70E4287B7C750034203A /* UIViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EBA70E3287B7C750034203A /* UIViewControllerExtension.swift */; };
 		0EE8E3432879C2A700340D67 /* ApiKeyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EE8E3422879C2A700340D67 /* ApiKeyManager.swift */; };
 		0EE8E3462879C7AE00340D67 /* WebService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EE8E3452879C7AE00340D67 /* WebService.swift */; };
 		0EE8E3492879C87500340D67 /* SurpriseMeApiRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EE8E3482879C87500340D67 /* SurpriseMeApiRepository.swift */; };
@@ -125,6 +126,7 @@
 		0EA95A6D287B2371000D1EB5 /* StringExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
 		0EA95A6F287B25BB000D1EB5 /* ShowErrorManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowErrorManager.swift; sourceTree = "<group>"; };
 		0EA95A71287B2F4C000D1EB5 /* UIViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExtension.swift; sourceTree = "<group>"; };
+		0EBA70E3287B7C750034203A /* UIViewControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewControllerExtension.swift; sourceTree = "<group>"; };
 		0EE8E3402879BCAB00340D67 /* Secrets.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Secrets.xcconfig; sourceTree = "<group>"; };
 		0EE8E3422879C2A700340D67 /* ApiKeyManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiKeyManager.swift; sourceTree = "<group>"; };
 		0EE8E3452879C7AE00340D67 /* WebService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebService.swift; sourceTree = "<group>"; };
@@ -255,6 +257,7 @@
 				0E8F98FF27EDEB6300E6D26B /* CGFloatExtension.swift */,
 				0EA95A6D287B2371000D1EB5 /* StringExtension.swift */,
 				0EA95A71287B2F4C000D1EB5 /* UIViewExtension.swift */,
+				0EBA70E3287B7C750034203A /* UIViewControllerExtension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -1126,6 +1129,7 @@
 				0EA95A72287B2F4C000D1EB5 /* UIViewExtension.swift in Sources */,
 				50084D5F27669B240031ADF6 /* ProfileInteractor.swift in Sources */,
 				0EE8E34C2879E40600340D67 /* AlamofireWebService.swift in Sources */,
+				0EBA70E4287B7C750034203A /* UIViewControllerExtension.swift in Sources */,
 				50084D7C2767878D0031ADF6 /* CreatePlayListCodable.swift in Sources */,
 				0E45B15527EF726C0063591C /* MyPlayListsCodable.swift in Sources */,
 				0EE8E3492879C87500340D67 /* SurpriseMeApiRepository.swift in Sources */,
