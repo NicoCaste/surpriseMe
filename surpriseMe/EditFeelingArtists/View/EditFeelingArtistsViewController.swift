@@ -7,13 +7,14 @@
 
 import UIKit
 
-class EditFeelingArtistsViewController: UIViewController, EditFeelingArtistsViewProtocol, UIGestureRecognizerDelegate, UITableViewDelegate, UITableViewDataSource {
+class EditFeelingArtistsViewController: UIViewController, EditFeelingArtistsViewProtocol, UITableViewDelegate, UITableViewDataSource {
     var presenter: EditFeelingArtistsPresenterProtocol?
     var newArtistsTextField: UITextField = UITextField()
     var tableView: UITableView = UITableView()
     lazy var createPlayListButton: UIButton = UIButton()
     lazy var addNewArtistsLabel: UILabel = UILabel()
     
+    private var notificationCenter = NotificationCenter.default
     var keyboardActive: Bool = false
     var lookingForNewFavorite: Bool = false
     var needReload: Bool = true
@@ -21,6 +22,8 @@ class EditFeelingArtistsViewController: UIViewController, EditFeelingArtistsView
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        notificationCenter.addObserver(self, selector: #selector(showErrorView(_:)), name: NSNotification.Name.showErrorView, object: nil)
+        
         self.configDismissBoard()
         key = FeelingCategories.getTitle(feeling: presenter?.feeling ?? .IWantALightsaber)
         title = key
@@ -31,7 +34,22 @@ class EditFeelingArtistsViewController: UIViewController, EditFeelingArtistsView
         setCreatePlayListButton()
         setTableView()
     }
-
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        notificationCenter.removeObserver(self, name: NSNotification.Name.showErrorView, object: nil)
+    }
+    
+    // MARK: - ObserverSelector
+    @objc func showErrorView(_ error: Notification) {
+        guard let errorMessage = error.userInfo  else { return }
+        let detailError = errorMessage["errorMessage"]
+        let errorView = ErrorViewViewController()
+        
+        errorView.errorMessage = detailError as? ErrorMessage
+        self.present(errorView, animated: true)
+    }
+    
     //MARK: - SetNewArtistsTextField
     func setNewArtistsTextField() {
         newArtistsTextField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)

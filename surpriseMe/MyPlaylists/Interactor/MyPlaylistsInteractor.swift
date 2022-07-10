@@ -23,6 +23,9 @@ class MyPlaylistsInteractor: MyPlaylistsInteractorProtocol {
             
             AF.request(url,  parameters: playListParameters, headers: headers).responseDecodable(of: MyPlayList.self){ playlists in
                 guard let playlists  = playlists.value else { return }
+                if playlists.items == nil {
+                    ShowErrorManager.showErrorView(title: "sorry".localized(), description: "errorWithoutPlaylist".localized())
+                }
                 completion(playlists.items ?? [])
             }
         })

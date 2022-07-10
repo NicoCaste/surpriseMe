@@ -29,13 +29,18 @@ class EditFeelingArtistsInteractor: EditFeelingArtistsInteractorProtocol {
         repository.findArtist(baseUrl: url, completion: {[weak self] artists in
             switch artists {
             case .success(let artistsMatch):
+                if artistsMatch.artists.items.isEmpty {
+                    ShowErrorManager.showErrorView(title: "ups".localized(), description: "anyArtist".localized())
+                }
                 if self?.reloadArtistsMatch == true {
                     completion(artistsMatch)
                 } else {
                     self?.reloadArtistsMatch = true
                 }
             case .failure:
-                ShowErrorManager.showErrorView(title: "ups".localized(), description: "anyArtist".localized())
+                if !artist.isEmpty {
+                    ShowErrorManager.showErrorView(title: "ups".localized(), description: "anyArtist".localized())
+                }
                 completion(nil)
             }
         })

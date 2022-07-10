@@ -47,3 +47,7 @@
 
 // MARK: - SurpriseMe
 "howDoYouFeel" = "How are you feeling right now?\nAdd artists and help us make the best playlist according to your mood today";
+
+// MARK: - MyPlayListInteractor
+"errorWithoutPlaylist" = "We couldn't find your playlists.\nPlease try again!";
+"myPlaylists" = "My Playlists";

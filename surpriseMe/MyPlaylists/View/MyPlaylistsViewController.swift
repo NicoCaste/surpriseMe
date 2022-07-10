@@ -12,10 +12,12 @@ class MyPlayListsViewController: UIViewController, MyPlaylistsViewProtocol, UITa
     var tableView: UITableView? = UITableView()
     var presenter: MyPlaylistsPresenterProtocol?
     var activityIndicator: UIActivityIndicatorView?
+    var notificationCenter = NotificationCenter.default
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        title =  "My Playlists"
+        notificationCenter.addObserver(self, selector: #selector(showErrorView(_:)), name: NSNotification.Name.showErrorView, object: nil)
+        title =  "myPlaylists".localized()
         view.backgroundColor = .systemBackground
         setTableView()
     }
@@ -23,6 +25,21 @@ class MyPlayListsViewController: UIViewController, MyPlaylistsViewProtocol, UITa
     override func viewWillAppear(_ animated: Bool) {
         presenter?.getPlaylists()
     }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        notificationCenter.removeObserver(self, name: NSNotification.Name.showErrorView, object: nil)
+    }
+    
+    @objc func showErrorView(_ error: Notification) {
+        guard let errorMessage = error.userInfo  else { return }
+        let detailError = errorMessage["errorMessage"]
+        let errorView = ErrorViewViewController()
+        
+        errorView.errorMessage = detailError as? ErrorMessage
+        self.present(errorView, animated: true)
+    }
+    
     
     func setTableView() {
         guard let tableView = tableView else { return }
