@@ -15,9 +15,9 @@ final class SurpriseMeApiRepository {
     }
     
     // MARK - CreatePlayList
-    func createPlayList(baseUrl: String? = nil, parameters:  Parameters, endpoint: String, limit: Int, completion:@escaping(Result<CreatePlayList, Error>) -> Void) {
+    func createPlayList(baseUrl: String, parameters:  Parameters, endpoint: String, limit: Int, completion:@escaping(Result<CreatePlayList, Error>) -> Void) {
         
-        webService.post(baseUrl ?? "", parameters: parameters, completion: { result in
+        webService.post(baseUrl, parameters: parameters, completion: { result in
             switch result {
             case .success(let data):
                 do {
@@ -33,9 +33,9 @@ final class SurpriseMeApiRepository {
     }
     
     // MARK: - AddTracksToPlayList
-    func addTracksToPlayList(baseUrl: String? = nil, parameters: Parameters, endpoint: String, limit: Int, completion:@escaping(Result<AddTracksToPlayListResponse, Error>) -> Void) {
+    func addTracksToPlayList(baseUrl: String, parameters: Parameters, endpoint: String, limit: Int, completion:@escaping(Result<AddTracksToPlayListResponse, Error>) -> Void) {
         
-        webService.post(baseUrl ?? "", parameters: parameters, completion: { result in
+        webService.post(baseUrl, parameters: parameters, completion: { result in
             switch result {
             case .success(let data):
                 do {
@@ -50,9 +50,10 @@ final class SurpriseMeApiRepository {
         })
     }
     
-    func getTrackRecommendations(baseUrl: String? = nil, parameters: Parameters, endpoint: String, limit: Int, completion:@escaping(Result<ArtistRelatedArtists, Error>) -> Void) {
+    // MARK: - GetTrackRecommendations
+    func getTrackRecommendations(baseUrl: String, parameters: Parameters, endpoint: String, limit: Int, completion:@escaping(Result<ArtistRelatedArtists, Error>) -> Void) {
         
-        webService.get(baseUrl ?? "", parameters: parameters, completion: { result in
+        webService.get(baseUrl, parameters: parameters, completion: { result in
             switch result {
             case .success(let data):
                 do {
@@ -67,13 +68,31 @@ final class SurpriseMeApiRepository {
         })
     }
     
-    func getArtistsTopTracks(baseUrl: String? = nil, parameters: Parameters, endpoint: String, limit: Int, completion:@escaping(Result<ArtistsTopTracks, Error>) -> Void) {
-        webService.get(baseUrl ?? "", parameters: parameters, completion: { result in
+    //MARK: - GetArtistsTopTracks
+    func getArtistsTopTracks(baseUrl: String, parameters: Parameters, endpoint: String, limit: Int, completion:@escaping(Result<ArtistsTopTracks, Error>) -> Void) {
+        webService.get(baseUrl, parameters: parameters, completion: { result in
             switch result {
             case .success(let data):
                 do {
                     let topTracks = try JSONDecoder().decode(ArtistsTopTracks.self, from: data)
                     completion(.success(topTracks))
+                } catch {
+                    completion(.failure(error))
+                }
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        })
+    }
+    
+    //MARK: - FindArtists
+    func findArtist(baseUrl: String, completion:@escaping(Result<EditFeeling, Error>) -> Void) {
+        webService.get(baseUrl, parameters: Parameters(), completion: { result in
+            switch result {
+            case .success(let data):
+                do {
+                    let artists = try JSONDecoder().decode(EditFeeling.self, from: data)
+                    completion(.success(artists))
                 } catch {
                     completion(.failure(error))
                 }

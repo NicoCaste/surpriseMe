@@ -22,6 +22,7 @@ class SurpriseMeTableViewCell: UITableViewCell {
     func populate(feeling: SurpriseMeFeeling) {
         var imageName: String = ""
         var TextFeeling: String = ""
+        
         switch feeling {
         case .IWantALightsaber:
             imageName = "IWantALightsaber"
@@ -34,6 +35,7 @@ class SurpriseMeTableViewCell: UITableViewCell {
         case .IWantToParty:
             imageName = "iWantToParty"
         }
+        
         TextFeeling = FeelingCategories.getTitle(feeling: feeling)
         if let image = UIImage(named: imageName) {
             setFeelingImage(image: image)

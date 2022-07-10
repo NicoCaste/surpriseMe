@@ -10,20 +10,22 @@ import Alamofire
 
 class EditFeelingArtistsInteractor: EditFeelingArtistsInteractorProtocol {
     var presenter: EditFeelingArtistsPresenterProtocol?
+    var manager: AlamofireWebService = AlamofireWebService()
+    var repository: SurpriseMeApiRepository
     
+    init() {
+        self.repository = SurpriseMeApiRepository(webService: manager)
+    }
     func findArtist(artist: String, completion: @escaping((EditFeeling?) -> Void)) {
         let editArtist = artist.replacingOccurrences(of: " ", with: "%20")
-        AuthorizationInteractor.getToken(completion: {[weak self] token in
-            guard let token = token else { return }
-            let headers: HTTPHeaders = [.authorization(bearerToken: token), .contentType("application/json")]
-            let url = ApiCaller.shared.makeURL(url:   "search?q=\(editArtist)&type=artist&limit=10")
-            AF.request( url, headers: headers).responseDecodable(of: EditFeeling.self) { artistMatch in
-                switch artistMatch.result {
-                case .success:
-                    completion(artistMatch.value)
-                case .failure:
-                    completion(nil)
-                }
+        let url = ApiCaller.shared.makeURL(url: "search?q=\(editArtist)&type=artist&limit=10")
+        repository.findArtist(baseUrl: url, completion: { artists in
+            switch artists {
+            case .success(let artistsMatch):
+                completion(artistsMatch)
+            case .failure:
+                //TODO: - Handler better error case 
+                completion(nil)
             }
         })
     }
