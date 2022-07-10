@@ -205,6 +205,7 @@ class EditFeelingArtistsViewController: UIViewController, EditFeelingArtistsView
         if let matchArtistCount = presenter?.artistsMatch?.count {
             if indexPath.row < matchArtistCount {
                 guard let currentArtist = presenter?.artistsMatch?[indexPath.row] else { return }
+                NotificationCenter.default.post(name: NSNotification.Name.reloadArtistsMatch, object: nil)
                 presenter?.setFavList(forKey: key, fav: currentArtist.artist, completion:{ [weak self] saveArtist in
                     if saveArtist {
                         self?.resetSearch()

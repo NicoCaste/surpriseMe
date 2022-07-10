@@ -14,4 +14,8 @@ extension Notification.Name {
     static var showErrorView: Notification.Name {
         return .init(rawValue: "showErrorView")
     }
+    
+    static var reloadArtistsMatch: Notification.Name {
+        return .init(rawValue: "reloadArtistsMatch")
+    }
 }

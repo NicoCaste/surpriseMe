@@ -13,16 +13,16 @@ struct ErrorMessage {
 }
 
 class ErrorViewViewController: UIViewController, CAAnimationDelegate {
+    let color1: CGColor = UIColor(red: 209/255, green: 107/255, blue: 165/255, alpha: 1).cgColor
+    let color2: CGColor = UIColor(red: 134/255, green: 168/255, blue: 231/255, alpha: 1).cgColor
+    let color3: CGColor = UIColor(red: 95/255, green: 251/255, blue: 241/255, alpha: 1).cgColor
+    
     lazy var cardView: UIView = UIView()
     lazy var closeButton: UIButton = UIButton()
     lazy var errorImage: UIImageView = UIImageView()
     lazy var errorTitle: UILabel = UILabel()
     lazy var errorDescription: UILabel = UILabel()
     lazy var errorMessage: ErrorMessage? = nil
-    let color1: CGColor = UIColor(red: 209/255, green: 107/255, blue: 165/255, alpha: 1).cgColor
-    let color2: CGColor = UIColor(red: 134/255, green: 168/255, blue: 231/255, alpha: 1).cgColor
-    let color3: CGColor = UIColor(red: 95/255, green: 251/255, blue: 241/255, alpha: 1).cgColor
-    
     let gradient: CAGradientLayer = CAGradientLayer()
     var gradientColorSet: [[CGColor]] = []
     var colorIndex: Int = 0
