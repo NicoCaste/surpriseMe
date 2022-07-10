@@ -14,7 +14,7 @@ class ProfileViewController: UIViewController, ProfileViewProtocol, UITableViewD
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "User Profile"
+        title = "userProfile".localized()
         view.backgroundColor = .systemBackground
         configLogOutButton()
         configTableView()
@@ -28,7 +28,7 @@ class ProfileViewController: UIViewController, ProfileViewProtocol, UITableViewD
     
     //MARK: - ConfigLogOutButton
     @objc func logOut() {
-        print("POR QUYE TE FUISTE MABEL!")
+        // TODO: - logout
     }
     
     //MARK: - ConfigLogOutButton

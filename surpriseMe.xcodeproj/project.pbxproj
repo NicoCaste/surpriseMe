@@ -17,6 +17,11 @@
 		0E8F990427EF61EB00E6D26B /* MyPlaylistsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E8F990327EF61EB00E6D26B /* MyPlaylistsPresenter.swift */; };
 		0E8F990627EF623200E6D26B /* MyPlaylistsEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E8F990527EF623200E6D26B /* MyPlaylistsEntity.swift */; };
 		0E8F990827EF62B400E6D26B /* MyPlaylistsRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E8F990727EF62B400E6D26B /* MyPlaylistsRouter.swift */; };
+		0EA95A66287B0ABE000D1EB5 /* ErrorViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EA95A65287B0ABE000D1EB5 /* ErrorViewViewController.swift */; };
+		0EA95A6A287B227F000D1EB5 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0EA95A6C287B227F000D1EB5 /* Localizable.strings */; };
+		0EA95A6E287B2371000D1EB5 /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EA95A6D287B2371000D1EB5 /* StringExtension.swift */; };
+		0EA95A70287B25BB000D1EB5 /* ShowErrorManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EA95A6F287B25BB000D1EB5 /* ShowErrorManager.swift */; };
+		0EA95A72287B2F4C000D1EB5 /* UIViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EA95A71287B2F4C000D1EB5 /* UIViewExtension.swift */; };
 		0EE8E3432879C2A700340D67 /* ApiKeyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EE8E3422879C2A700340D67 /* ApiKeyManager.swift */; };
 		0EE8E3462879C7AE00340D67 /* WebService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EE8E3452879C7AE00340D67 /* WebService.swift */; };
 		0EE8E3492879C87500340D67 /* SurpriseMeApiRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EE8E3482879C87500340D67 /* SurpriseMeApiRepository.swift */; };
@@ -115,6 +120,11 @@
 		0E8F990327EF61EB00E6D26B /* MyPlaylistsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MyPlaylistsPresenter.swift; path = surpriseMe/MyPlaylists/Presenter/MyPlaylistsPresenter.swift; sourceTree = SOURCE_ROOT; };
 		0E8F990527EF623200E6D26B /* MyPlaylistsEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MyPlaylistsEntity.swift; path = surpriseMe/MyPlaylists/Entity/MyPlaylistsEntity.swift; sourceTree = SOURCE_ROOT; };
 		0E8F990727EF62B400E6D26B /* MyPlaylistsRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MyPlaylistsRouter.swift; path = surpriseMe/MyPlaylists/Router/MyPlaylistsRouter.swift; sourceTree = SOURCE_ROOT; };
+		0EA95A65287B0ABE000D1EB5 /* ErrorViewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorViewViewController.swift; sourceTree = "<group>"; };
+		0EA95A6B287B227F000D1EB5 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		0EA95A6D287B2371000D1EB5 /* StringExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
+		0EA95A6F287B25BB000D1EB5 /* ShowErrorManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowErrorManager.swift; sourceTree = "<group>"; };
+		0EA95A71287B2F4C000D1EB5 /* UIViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExtension.swift; sourceTree = "<group>"; };
 		0EE8E3402879BCAB00340D67 /* Secrets.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Secrets.xcconfig; sourceTree = "<group>"; };
 		0EE8E3422879C2A700340D67 /* ApiKeyManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiKeyManager.swift; sourceTree = "<group>"; };
 		0EE8E3452879C7AE00340D67 /* WebService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebService.swift; sourceTree = "<group>"; };
@@ -243,6 +253,8 @@
 			children = (
 				0E8F98FD27EDE9AC00E6D26B /* NotificationNameExtension.swift */,
 				0E8F98FF27EDEB6300E6D26B /* CGFloatExtension.swift */,
+				0EA95A6D287B2371000D1EB5 /* StringExtension.swift */,
+				0EA95A71287B2F4C000D1EB5 /* UIViewExtension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -278,6 +290,23 @@
 				0E45B15427EF726C0063591C /* MyPlayListsCodable.swift */,
 			);
 			path = Interactor;
+			sourceTree = "<group>";
+		};
+		0EA95A64287B0A9B000D1EB5 /* Error */ = {
+			isa = PBXGroup;
+			children = (
+				0EA95A65287B0ABE000D1EB5 /* ErrorViewViewController.swift */,
+				0EA95A6F287B25BB000D1EB5 /* ShowErrorManager.swift */,
+			);
+			path = Error;
+			sourceTree = "<group>";
+		};
+		0EA95A67287B2253000D1EB5 /* DeStringers */ = {
+			isa = PBXGroup;
+			children = (
+				0EA95A6C287B227F000D1EB5 /* Localizable.strings */,
+			);
+			path = DeStringers;
 			sourceTree = "<group>";
 		};
 		0EE8E33F2879BC8900340D67 /* ManagingSecrets */ = {
@@ -358,6 +387,7 @@
 				50E562A827C124B100CFED94 /* FeelingCategories */,
 				50084D022764E42B0031ADF6 /* Networking */,
 				0E8F98FC27EDE99300E6D26B /* Extension */,
+				0EA95A64287B0A9B000D1EB5 /* Error */,
 				5036A9D427DC0F8A00957117 /* Utils */,
 				50084CCD2764CF8B0031ADF6 /* AppDelegate.swift */,
 				50084CCF2764CF8B0031ADF6 /* SceneDelegate.swift */,
@@ -746,6 +776,7 @@
 		5036A9D427DC0F8A00957117 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				0EA95A67287B2253000D1EB5 /* DeStringers */,
 				5036A9D527DC0FA000957117 /* ActivityIndicator.swift */,
 			);
 			path = Utils;
@@ -957,6 +988,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				50084CDA2764CF8E0031ADF6 /* LaunchScreen.storyboard in Resources */,
+				0EA95A6A287B227F000D1EB5 /* Localizable.strings in Resources */,
 				50084CD72764CF8E0031ADF6 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1091,6 +1123,7 @@
 				50084D5127662F1F0031ADF6 /* SurpriseMeEntity.swift in Sources */,
 				5036A9D627DC0FA000957117 /* ActivityIndicator.swift in Sources */,
 				50E562AA27C124D200CFED94 /* FeelingCategories.swift in Sources */,
+				0EA95A72287B2F4C000D1EB5 /* UIViewExtension.swift in Sources */,
 				50084D5F27669B240031ADF6 /* ProfileInteractor.swift in Sources */,
 				0EE8E34C2879E40600340D67 /* AlamofireWebService.swift in Sources */,
 				50084D7C2767878D0031ADF6 /* CreatePlayListCodable.swift in Sources */,
@@ -1107,6 +1140,7 @@
 				50084D162764F0850031ADF6 /* AuthorizationEntity.swift in Sources */,
 				0E8F990427EF61EB00E6D26B /* MyPlaylistsPresenter.swift in Sources */,
 				50084D4D27662EB70031ADF6 /* SurpriseMeInteractor.swift in Sources */,
+				0EA95A6E287B2371000D1EB5 /* StringExtension.swift in Sources */,
 				50084D2C27654E780031ADF6 /* TabBarPresenter.swift in Sources */,
 				50E5629D27C117C100CFED94 /* EditFeelingArtistsPresenter.swift in Sources */,
 				50084D142764F0030031ADF6 /* AuthorizationPresenter.swift in Sources */,
@@ -1127,6 +1161,7 @@
 				50084D6327669B770031ADF6 /* ProfileEntity.swift in Sources */,
 				50084D6527669BB60031ADF6 /* ProfileRouter.swift in Sources */,
 				50084D78276775CC0031ADF6 /* CreatePlayListRouter.swift in Sources */,
+				0EA95A70287B25BB000D1EB5 /* ShowErrorManager.swift in Sources */,
 				50E562A127C1184A00CFED94 /* EditFeelingArtistsModule.swift in Sources */,
 				50084D6F2767757D0031ADF6 /* CreatePlayListViewController.swift in Sources */,
 				50084D41276550020031ADF6 /* MyPlaylistsViewController.swift in Sources */,
@@ -1153,6 +1188,7 @@
 				50084D2827654DA60031ADF6 /* TabBarViewController.swift in Sources */,
 				50084D432765502C0031ADF6 /* SurpriseMeViewController.swift in Sources */,
 				50E562A327C1185E00CFED94 /* EditFeelingArtistsViewController.swift in Sources */,
+				0EA95A66287B0ABE000D1EB5 /* ErrorViewViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1189,6 +1225,14 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		0EA95A6C287B227F000D1EB5 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				0EA95A6B287B227F000D1EB5 /* en */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
 		50084CD82764CF8E0031ADF6 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (

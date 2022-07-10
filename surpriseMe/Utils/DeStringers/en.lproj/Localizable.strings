@@ -1,0 +1,49 @@
+/* 
+  Localizable.strings
+  surpriseMe
+
+  Created by nicolas castello on 10/07/2022.
+  
+*/
+
+//MARK: - Titles
+"newPlayList" = "New Playlist!";
+"myPlaylists" = "My PlayLists";
+"surpriseMe" = "Surprise Me!";
+"userConfig" = "User Config";
+"userProfile" = "User Profile";
+"sorry" = "Sorry!";
+"ups" = "Ups!";
+
+// MARK: - CreatePlayList
+"errorTrackRecommendation" = "We couldn't track recommendations.\nPlease try again!";
+"errorCreatePlaylist" = "We can't create the PlayList.\nPlease, try again!";
+"createBy" = "Create by SorpriseMe! app.";
+
+"anyArtist" = "We can't found any artist.\nPlease try again!";
+
+
+// MARK: - ProfilePresenter
+"errorUserInfo" = "We couldn't find your info.\nPleasy try again!";
+"name" = "Name";
+"email" = "Email";
+"userId" = "User id";
+"plan" = "Plan";
+
+// MARK: - EditFeelingArtists
+"artist" = " Artist";
+"addartists" = "Add artists. help us inspire";
+"createNewPlaylist" = "Create New Playlist";
+"delete" = "Delete";
+"edit" = "Edit";
+
+// MARK: - FeelingCategories
+"iWantALightsaber" = "I want a lightsaber!";
+"iWantToParty" = "I want to party!";
+"suitUp" = "SUIT UP!";
+"imThirsty" = "Im thirsty";
+"imDown" = "Im down :/";
+
+
+// MARK: - SurpriseMe
+"howDoYouFeel" = "How are you feeling right now?\nAdd artists and help us make the best playlist according to your mood today";

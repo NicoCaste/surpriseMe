@@ -10,4 +10,8 @@ extension Notification.Name {
     static var playBackPaused: Notification.Name {
         return .init(rawValue: "AudioPlayer.playbackPaused")
     }
+    
+    static var showErrorView: Notification.Name {
+        return .init(rawValue: "showErrorView")
+    }
 }

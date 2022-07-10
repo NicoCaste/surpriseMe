@@ -16,7 +16,8 @@ class CreatePlayListViewController: UIViewController, CreatePlayListViewProtocol
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "New PlayList - \(FeelingCategories.getTitle(feeling: presenter?.feeling ?? .IWantALightsaber))"
+        notificationCenter.addObserver(self, selector: #selector(showErrorView(_:)), name: NSNotification.Name.showErrorView, object: nil)
+        title = "newPlayList".localized()
         view.backgroundColor = .systemBackground
         setActivityIndicator()
         presenter?.getTrackRecommendation()
@@ -29,9 +30,19 @@ class CreatePlayListViewController: UIViewController, CreatePlayListViewProtocol
         tableView.reloadData()
     }
     
+    @objc func showErrorView(_ error: Notification) {
+        guard let errorMessage = error.userInfo  else { return }
+        let detailError = errorMessage["errorMessage"]
+        let errorView = ErrorViewViewController()
+        
+        errorView.errorMessage = detailError as? ErrorMessage
+        self.present(errorView, animated: true)
+    }
+    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         notificationCenter.post(name: NSNotification.Name.playBackPaused, object: nil)
+        notificationCenter.removeObserver(self, name: NSNotification.Name.showErrorView, object: ErrorMessage.self)
     }
     
     func reloadList() {
@@ -86,6 +97,7 @@ class CreatePlayListViewController: UIViewController, CreatePlayListViewProtocol
     }
     
     func setActivityIndicator() {
+        activityIndicator = nil
         tableView.isHidden = true
         createPlayListButton.isHidden = true
         activityIndicator = UIActivityIndicatorView(style: .large)

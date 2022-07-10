@@ -25,7 +25,7 @@ class EditFeelingArtistsInteractor: EditFeelingArtistsInteractorProtocol {
             case .success(let artistsMatch):
                 completion(artistsMatch)
             case .failure:
-                //TODO: - Handler better error case 
+                ShowErrorManager.showErrorView(title: "ups".localized(), description: "anyArtist".localized())
                 completion(nil)
             }
         })

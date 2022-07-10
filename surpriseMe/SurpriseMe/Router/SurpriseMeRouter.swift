@@ -27,7 +27,5 @@ class SupriseMeRouter: SurpriseMeRouterProtocol {
     func goToEditArtists(feeling: SurpriseMeFeeling) {
         let controller = EditFeelingArtistsModule.build(feeling: feeling)
         viewController?.navigationController?.pushViewController(controller, animated: true)
-    }
-    //TODO: Create a PlayList, take random atributes for category.
-    //TODO: Play on Spotify. - i need deeplinks. 
+    } 
 }

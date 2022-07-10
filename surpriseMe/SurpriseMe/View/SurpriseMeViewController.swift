@@ -17,7 +17,7 @@ class SurpriseMeViewController: UIViewController, SurpriseMeViewProtocol, UITabl
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Surprise Me!" 
+        title = "surpriseMe".localized()
         view.backgroundColor = .systemBackground
         setSurpriseMeLabel()
         setTableView()
@@ -25,9 +25,10 @@ class SurpriseMeViewController: UIViewController, SurpriseMeViewProtocol, UITabl
     
     //MARK: - SetSurpriseMeLabel
     func setSurpriseMeLabel() {
-        surpriseMeLabel.font = UIFont(name: "Noto Sans Myanmar Bold", size: 25)
-        surpriseMeLabel.text = "How do you feel right now?"
-        surpriseMeLabel.textAlignment = .center
+        surpriseMeLabel.font = UIFont(name: "Noto Sans Myanmar semi Bold", size: 15)
+        surpriseMeLabel.text = "howDoYouFeel".localized()
+        surpriseMeLabel.textAlignment = .left
+        surpriseMeLabel.numberOfLines = 0
         surpriseMeLabel.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(surpriseMeLabel)
         
@@ -68,7 +69,7 @@ class SurpriseMeViewController: UIViewController, SurpriseMeViewProtocol, UITabl
     }
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        let editAction = UIContextualAction(style: .normal, title: "Edit", handler: {[weak self] _,_,_ in
+        let editAction = UIContextualAction(style: .normal, title: "edit".localized(), handler: {[weak self] _,_,_ in
             guard let presenter = self?.presenter else { return }
             presenter.goToEditArtists(feeling: presenter.getFeelings()[indexPath.row])
         })

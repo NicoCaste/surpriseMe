@@ -37,11 +37,15 @@ class CreatePlayListInteractor: CreatePlayListInteractorProtocol {
         repository.createPlayList(baseUrl: url, parameters: parameters, endpoint: "", limit: 1, completion: {[weak self] result in
             switch result {
                 case .success(let newPlayList):
-                self?.addTracksToPlayList(playListId: newPlayList.id ?? "", completion: { snaptShot in
-                    completion(newPlayList)
-                })
-            case .failure(let error ):
-                print(error)
+                if newPlayList.uri == nil {
+                    ShowErrorManager.showErrorView(title: "ups".localized(), description: "errorCreatePlaylist".localized())
+                } else {
+                    self?.addTracksToPlayList(playListId: newPlayList.id ?? "", completion: { snaptShot in
+                        completion(newPlayList)
+                    })
+                }
+            case .failure( _):
+                ShowErrorManager.showErrorView(title: "ups".localized(), description: "errorCreatePlaylist".localized())
                 break
             }
         })
@@ -50,7 +54,7 @@ class CreatePlayListInteractor: CreatePlayListInteractorProtocol {
     // MARK: - GetCreatePlayListParameters
     private func getCreatePlayListParameters() -> Parameters {
         guard let presenter = presenter else { return Parameters()}
-        return Parameters(name: FeelingCategories.getTitle(feeling: presenter.feeling ?? .IWantALightsaber), description:"Create by SorpriseMe! app.")
+        return Parameters(name: FeelingCategories.getTitle(feeling: presenter.feeling ?? .IWantALightsaber), description: "createBy".localized())
     }
     
     // MARK: - AddTracksToPlayList
@@ -87,12 +91,17 @@ class CreatePlayListInteractor: CreatePlayListInteractorProtocol {
         repository.getTrackRecommendations(baseUrl: url, parameters: parameters, endpoint: "", limit: 1, completion: {[weak self] artistList in
             switch artistList {
             case .success(let artists):
-                self?.getTopTracks(artists: artists.artists, completionTracks: {
-                    completion(self?.topTracks ?? [])
-                })
-            case .failure(let error):
-                //TODO: Handler error
-                print(error)
+                if artists.artists.isEmpty {
+                    ShowErrorManager.showErrorView(title: "sorry".localized(), description: "errorTrackRecommendation".localized())
+                    completion([])
+                } else {
+                    self?.getTopTracks(artists: artists.artists, completionTracks: {
+                        completion(self?.topTracks ?? [])
+                    })
+                }
+            case .failure( _):
+                ShowErrorManager.showErrorView(title: "sorry".localized(), description: "errorTrackRecommendation".localized())
+                completion([])
             }
         })
     }
@@ -125,11 +134,10 @@ class CreatePlayListInteractor: CreatePlayListInteractorProtocol {
                 switch tracks {
                 case .success(let topTraks):
                     completion(topTraks)
-                case .failure:
-                    //TODO: Handler error
+                case .failure( _):
+                    ShowErrorManager.showErrorView(title: "sorry".localized(), description: "errorTrackRecommendation".localized())
                     break
                 }
-                
             })
     }
     

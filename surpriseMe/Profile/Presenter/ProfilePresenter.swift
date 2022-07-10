@@ -34,7 +34,7 @@ class ProfilePresenter: ProfilePresenterProtocol, ProfileImageDelegate {
                 guard let profile = self?.profile else {return}
                 self?.interactor?.cacheClient(result: profile)
             case .failure:
-                print(profileData.error?.errorDescription)
+                ShowErrorManager.showErrorView(title: "sorry".localized(), description: "errorUserInfo".localized())
             }
             
         })
@@ -54,13 +54,13 @@ class ProfilePresenter: ProfilePresenterProtocol, ProfileImageDelegate {
     func sectionName(section: Int) -> String {
         switch section {
         case UserConfigTrakingSection.name.rawValue:
-            return "Name"
+            return "name".localized()
         case UserConfigTrakingSection.email.rawValue:
-            return "Email"
+            return "email".localized()
         case UserConfigTrakingSection.id.rawValue:
-            return "User id"
+            return "userId".localized()
         case UserConfigTrakingSection.plan.rawValue:
-            return "Plan"
+            return "plan".localized()
         default:
             return ""
         }

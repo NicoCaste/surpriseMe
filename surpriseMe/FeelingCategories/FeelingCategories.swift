@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 enum PlayListTitle: String, CaseIterable {
-    case IWantALightsaber = " I want a lightsaber!"
+    case IWantALightsaber = "I want a lightsaber!"
     case IWantToParty = "I want to party!"
     case SuitUp = "SUIT UP!"
     case ImThirsty = "Im thirsty"
@@ -21,15 +21,15 @@ class FeelingCategories {
     static func getTitle(feeling: SurpriseMeFeeling ) -> String {
         switch feeling {
         case .IWantALightsaber:
-            return PlayListTitle.IWantALightsaber.rawValue
+            return "iWantALightsaber".localized()
         case .IWantToParty:
-            return PlayListTitle.IWantToParty.rawValue
+            return "iWantToParty".localized()
         case .SuitUp:
-            return PlayListTitle.SuitUp.rawValue
+            return "suitUp".localized()
         case .ImThirsty:
-            return PlayListTitle.ImThirsty.rawValue
+            return "imThirsty".localized()
         case .ImDown:
-            return PlayListTitle.ImDown.rawValue
+            return "imDown".localized()
         }
     }
 }

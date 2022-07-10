@@ -31,6 +31,10 @@ class CreatePlayListPresenter: CreatePlayListPresenterProtocol {
     
     func getTrackRecommendation() {
         interactor?.getTrackRecommendations(completion: { [weak self] trackList in
+            if trackList.isEmpty {
+                //TODO: - make popup or view empty list
+                self?.view?.activityIndicator?.removeFromSuperview()
+            }
             for newTracks in trackList {
                 for track in newTracks.tracks {
                     self?.selectedTracks.append(track)

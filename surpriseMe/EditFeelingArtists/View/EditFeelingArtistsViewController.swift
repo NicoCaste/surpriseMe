@@ -79,7 +79,7 @@ class EditFeelingArtistsViewController: UIViewController, EditFeelingArtistsView
         newArtistsTextField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
         
         newArtistsTextField.font = UIFont(name: "Noto Sans Myanmar Bold", size: 14)
-        newArtistsTextField.placeholder = " Artist"
+        newArtistsTextField.placeholder = "artist".localized()
         newArtistsTextField.backgroundColor = .systemFill
         setNewArtistIcon()
         newArtistsTextField.translatesAutoresizingMaskIntoConstraints = false
@@ -96,7 +96,7 @@ class EditFeelingArtistsViewController: UIViewController, EditFeelingArtistsView
     //MARK: - SetAddNewArtistsLabel
     func setAddNewArtistsLabel() {
         addNewArtistsLabel.font = UIFont(name: "Noto Sans Myanmar Bold", size: 18)
-        addNewArtistsLabel.text = "Add artists to create a new playlist"
+        addNewArtistsLabel.text = "addartists".localized()
         addNewArtistsLabel.textAlignment = .left
         addNewArtistsLabel.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(addNewArtistsLabel)
@@ -140,7 +140,7 @@ class EditFeelingArtistsViewController: UIViewController, EditFeelingArtistsView
         createPlayListButton.translatesAutoresizingMaskIntoConstraints = false
         createPlayListButton.addTarget(self, action:  #selector(createPlayList), for: .touchUpInside)
         view.addSubview(createPlayListButton)
-        createPlayListButton.setTitle("Create New Playlist", for: .normal)
+        createPlayListButton.setTitle("createNewPlaylist".localized(), for: .normal)
         createPlayListButton.layer.masksToBounds = true
         createPlayListButton.layer.cornerRadius = 5
         createPlayListButton.backgroundColor = .systemBlue
@@ -220,7 +220,7 @@ class EditFeelingArtistsViewController: UIViewController, EditFeelingArtistsView
             return UISwipeActionsConfiguration(actions: actions)
         }
         let currentArtist = presenter?.artistsMatch?[indexPath.row].artist
-            let deleteAction = UIContextualAction(style: .destructive, title: "Delete", handler: {[weak self] _,_,_ in
+        let deleteAction = UIContextualAction(style: .destructive, title: "delete".localized(), handler: {[weak self] _,_,_ in
                 self?.presenter?.removeFav(forKey: self?.key ?? "", fav: currentArtist ?? Artist(), completion: {[weak self] artistsWasRemoved in
                     if artistsWasRemoved {
                         self?.resetSearch()

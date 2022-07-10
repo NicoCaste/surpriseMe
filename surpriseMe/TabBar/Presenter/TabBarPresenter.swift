@@ -19,13 +19,13 @@ class TabBarPresenter: TabBarPresenterProtocol {
         let navigatorSurpriseMe = router.goToSurpriseMe()
         let navigatorUserConfig = router.goToUserConfig()
         
-        navigatorImBoring.tabBarItem = UITabBarItem(title: "My PlayLists", image: UIImage(systemName: "music.note.list"), tag: 1)
+        navigatorImBoring.tabBarItem = UITabBarItem(title: "myPlaylists".localized(), image: UIImage(systemName: "music.note.list"), tag: 1)
         navigatorImBoring.navigationBar.prefersLargeTitles = true
         
-        navigatorSurpriseMe.tabBarItem = UITabBarItem(title: "Surprise Me!", image: UIImage(systemName: "earbuds"), tag: 1)
+        navigatorSurpriseMe.tabBarItem = UITabBarItem(title: "surpriseMe".localized(), image: UIImage(systemName: "earbuds"), tag: 1)
         navigatorSurpriseMe.navigationBar.prefersLargeTitles = true
         
-        navigatorUserConfig.tabBarItem = UITabBarItem(title: "User Config", image: UIImage(systemName: "figure.wave"), tag: 1)
+        navigatorUserConfig.tabBarItem = UITabBarItem(title: "userConfig".localized(), image: UIImage(systemName: "figure.wave"), tag: 1)
         navigatorUserConfig.navigationBar.prefersLargeTitles = true
         
         navigators.append(navigatorSurpriseMe)
